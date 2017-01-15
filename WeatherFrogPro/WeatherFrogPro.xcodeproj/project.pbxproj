@@ -14,7 +14,39 @@
 		84425F7A1E2B62AE0050AA6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84425F781E2B62AE0050AA6F /* Main.storyboard */; };
 		84425F7C1E2B62AE0050AA6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84425F7B1E2B62AE0050AA6F /* Assets.xcassets */; };
 		84425F7F1E2B62AE0050AA6F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84425F7D1E2B62AE0050AA6F /* LaunchScreen.storyboard */; };
+		84425F8D1E2B64800050AA6F /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84425F8C1E2B64800050AA6F /* NotificationCenter.framework */; };
+		84425F901E2B64800050AA6F /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425F8F1E2B64800050AA6F /* TodayViewController.swift */; };
+		84425F931E2B64800050AA6F /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84425F911E2B64800050AA6F /* MainInterface.storyboard */; };
+		84425F971E2B64800050AA6F /* WeatherToday.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 84425F8A1E2B64800050AA6F /* WeatherToday.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		84425F9D1E2B65EC0050AA6F /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 84425F9C1E2B65EC0050AA6F /* Settings.bundle */; };
+		84425FA01E2B66070050AA6F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84425F9F1E2B66070050AA6F /* CloudKit.framework */; };
+		84425FA21E2B663E0050AA6F /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84425FA11E2B663E0050AA6F /* MapKit.framework */; };
+		84425FA41E2B667E0050AA6F /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84425F9F1E2B66070050AA6F /* CloudKit.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84425F951E2B64800050AA6F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 84425F641E2B62AD0050AA6F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84425F891E2B64800050AA6F;
+			remoteInfo = WeatherToday;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		84425F9B1E2B64800050AA6F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				84425F971E2B64800050AA6F /* WeatherToday.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		84425F6C1E2B62AE0050AA6F /* WeatherFrogPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherFrogPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +58,16 @@
 		84425F7B1E2B62AE0050AA6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84425F7E1E2B62AE0050AA6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84425F801E2B62AE0050AA6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84425F8A1E2B64800050AA6F /* WeatherToday.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WeatherToday.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		84425F8C1E2B64800050AA6F /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		84425F8F1E2B64800050AA6F /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		84425F921E2B64800050AA6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		84425F941E2B64800050AA6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84425F9C1E2B65EC0050AA6F /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		84425F9E1E2B65FB0050AA6F /* WeatherFrogPro.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherFrogPro.entitlements; sourceTree = "<group>"; };
+		84425F9F1E2B66070050AA6F /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		84425FA11E2B663E0050AA6F /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		84425FA31E2B667C0050AA6F /* WeatherToday.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WeatherToday.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +75,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84425FA21E2B663E0050AA6F /* MapKit.framework in Frameworks */,
+				84425FA01E2B66070050AA6F /* CloudKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84425F871E2B64800050AA6F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84425F8D1E2B64800050AA6F /* NotificationCenter.framework in Frameworks */,
+				84425FA41E2B667E0050AA6F /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +96,8 @@
 			isa = PBXGroup;
 			children = (
 				84425F6E1E2B62AE0050AA6F /* WeatherFrogPro */,
+				84425F8E1E2B64800050AA6F /* WeatherToday */,
+				84425F8B1E2B64800050AA6F /* Frameworks */,
 				84425F6D1E2B62AE0050AA6F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -51,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				84425F6C1E2B62AE0050AA6F /* WeatherFrogPro.app */,
+				84425F8A1E2B64800050AA6F /* WeatherToday.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -65,9 +121,32 @@
 				84425F7B1E2B62AE0050AA6F /* Assets.xcassets */,
 				84425F7D1E2B62AE0050AA6F /* LaunchScreen.storyboard */,
 				84425F801E2B62AE0050AA6F /* Info.plist */,
+				84425F9E1E2B65FB0050AA6F /* WeatherFrogPro.entitlements */,
 				84425F711E2B62AE0050AA6F /* WeatherFrogPro.xcdatamodeld */,
+				84425F9C1E2B65EC0050AA6F /* Settings.bundle */,
 			);
 			path = WeatherFrogPro;
+			sourceTree = "<group>";
+		};
+		84425F8B1E2B64800050AA6F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84425FA11E2B663E0050AA6F /* MapKit.framework */,
+				84425F9F1E2B66070050AA6F /* CloudKit.framework */,
+				84425F8C1E2B64800050AA6F /* NotificationCenter.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84425F8E1E2B64800050AA6F /* WeatherToday */ = {
+			isa = PBXGroup;
+			children = (
+				84425FA31E2B667C0050AA6F /* WeatherToday.entitlements */,
+				84425F8F1E2B64800050AA6F /* TodayViewController.swift */,
+				84425F911E2B64800050AA6F /* MainInterface.storyboard */,
+				84425F941E2B64800050AA6F /* Info.plist */,
+			);
+			path = WeatherToday;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,15 +159,34 @@
 				84425F681E2B62AD0050AA6F /* Sources */,
 				84425F691E2B62AD0050AA6F /* Frameworks */,
 				84425F6A1E2B62AD0050AA6F /* Resources */,
+				84425F9B1E2B64800050AA6F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				84425F961E2B64800050AA6F /* PBXTargetDependency */,
 			);
 			name = WeatherFrogPro;
 			productName = WeatherFrogPro;
 			productReference = 84425F6C1E2B62AE0050AA6F /* WeatherFrogPro.app */;
 			productType = "com.apple.product-type.application";
+		};
+		84425F891E2B64800050AA6F /* WeatherToday */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84425F981E2B64800050AA6F /* Build configuration list for PBXNativeTarget "WeatherToday" */;
+			buildPhases = (
+				84425F861E2B64800050AA6F /* Sources */,
+				84425F871E2B64800050AA6F /* Frameworks */,
+				84425F881E2B64800050AA6F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WeatherToday;
+			productName = WeatherToday;
+			productReference = 84425F8A1E2B64800050AA6F /* WeatherToday.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -104,6 +202,45 @@
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = PH3V9JYRDW;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
+					};
+					84425F891E2B64800050AA6F = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = PH3V9JYRDW;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -121,6 +258,7 @@
 			projectRoot = "";
 			targets = (
 				84425F6B1E2B62AD0050AA6F /* WeatherFrogPro */,
+				84425F891E2B64800050AA6F /* WeatherToday */,
 			);
 		};
 /* End PBXProject section */
@@ -130,9 +268,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84425F9D1E2B65EC0050AA6F /* Settings.bundle in Resources */,
 				84425F7F1E2B62AE0050AA6F /* LaunchScreen.storyboard in Resources */,
 				84425F7C1E2B62AE0050AA6F /* Assets.xcassets in Resources */,
 				84425F7A1E2B62AE0050AA6F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		84425F881E2B64800050AA6F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84425F931E2B64800050AA6F /* MainInterface.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,7 +297,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		84425F861E2B64800050AA6F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84425F901E2B64800050AA6F /* TodayViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		84425F961E2B64800050AA6F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84425F891E2B64800050AA6F /* WeatherToday */;
+			targetProxy = 84425F951E2B64800050AA6F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		84425F781E2B62AE0050AA6F /* Main.storyboard */ = {
@@ -167,6 +330,14 @@
 				84425F7E1E2B62AE0050AA6F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		84425F911E2B64800050AA6F /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84425F921E2B64800050AA6F /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -268,9 +439,12 @@
 		84425F841E2B62AE0050AA6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -281,12 +455,45 @@
 		84425F851E2B62AE0050AA6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		84425F991E2B64800050AA6F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = WeatherToday/WeatherToday.entitlements;
+				DEVELOPMENT_TEAM = PH3V9JYRDW;
+				INFOPLIST_FILE = WeatherToday/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		84425F9A1E2B64800050AA6F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = WeatherToday/WeatherToday.entitlements;
+				DEVELOPMENT_TEAM = PH3V9JYRDW;
+				INFOPLIST_FILE = WeatherToday/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -308,6 +515,14 @@
 			buildConfigurations = (
 				84425F841E2B62AE0050AA6F /* Debug */,
 				84425F851E2B62AE0050AA6F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		84425F981E2B64800050AA6F /* Build configuration list for PBXNativeTarget "WeatherToday" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84425F991E2B64800050AA6F /* Debug */,
+				84425F9A1E2B64800050AA6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
