@@ -1,5 +1,5 @@
 //
-//  LocationsTableController.swift
+//  PlacemarksTableController.swift
 //  WeatherFrogPro
 //
 //  Created by Libor Kučera on 15.01.17.
@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class LocationsTableController: UITableViewController {
+class PlacemarksTableController: UITableViewController {
     
     var managedObjectContext: NSManagedObjectContext? = nil
 

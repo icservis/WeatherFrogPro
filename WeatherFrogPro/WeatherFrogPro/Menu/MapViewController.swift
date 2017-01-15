@@ -11,9 +11,11 @@ import MapKit
 import CoreLocation
 
 
-class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate {
+class MapViewController: UIViewController {
     
-    let searchController = UISearchController(searchResultsController: nil)
+    var searchController : UISearchController? = nil
+    
+    var selectedPin: MKMapItem? = nil;
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -24,17 +26,24 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
 
         // Do any additional setup after loading the view.
         
-        self.searchController.searchResultsUpdater = self
-        self.searchController.dimsBackgroundDuringPresentation = false
-        self.searchController.hidesNavigationBarDuringPresentation = false
+        let locationSearchTable = MapSearchTableController()
+        locationSearchTable.mapView = self.mapView
+        locationSearchTable.handleMapSearchDelegate = self
+        
+        self.searchController = UISearchController(searchResultsController: locationSearchTable)
+        self.searchController!.searchResultsUpdater = locationSearchTable
+        self.searchController!.dimsBackgroundDuringPresentation = true
+        self.searchController!.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
-        self.navigationItem.titleView = self.searchController.searchBar
-        self.searchController.searchBar.delegate = self
+        
+        let searchBar = self.searchController!.searchBar;
+        self.navigationItem.titleView = searchBar
+        searchBar.delegate = locationSearchTable
         
         self.locationManager.delegate = self
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
+        self.locationManager.requestLocation()
         self.mapView?.showsUserLocation = true
     }
 
@@ -53,6 +62,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         // Pass the selected object to the new view controller.
     }
     */
+
+    
+
+}
+
+// MARK: - Location
+
+
+extension MapViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations.last
@@ -66,16 +90,31 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         print("Error:" + error.localizedDescription)
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("go search text:" + (searchBar.text!))
-        searchController.isActive = false
+}
+
+extension MapViewController : HandleSearchMap {
+    
+    func dropPinZoomIn(to mapItem: MKMapItem) {
+        self.selectedPin = mapItem
+        
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        self.searchController?.isActive = false
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = mapItem.placemark.coordinate
+        annotation.title = mapItem.name
+        annotation.subtitle = (mapItem.placemark.addressDictionary!["FormattedAddressLines"] as! [String]).joined(separator: ", ")
+        self.mapView.addAnnotation(annotation)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: mapItem.placemark.coordinate, span: span)
+        self.mapView.setRegion(region, animated: true)
+        
     }
     
-
 }
 
-extension MapViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        print("searched text:" + (searchController.searchBar.text!))
-    }
+extension MapViewController : MKMapViewDelegate {
+    
 }
+
