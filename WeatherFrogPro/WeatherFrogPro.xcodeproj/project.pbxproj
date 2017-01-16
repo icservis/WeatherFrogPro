@@ -515,7 +515,7 @@
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.weatherfrog2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -531,7 +531,7 @@
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.weatherfrog2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -545,7 +545,7 @@
 				INFOPLIST_FILE = WeatherToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.weatherfrog2.weathertoday";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -560,7 +560,7 @@
 				INFOPLIST_FILE = WeatherToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.weatherfrog2.weathertoday";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
