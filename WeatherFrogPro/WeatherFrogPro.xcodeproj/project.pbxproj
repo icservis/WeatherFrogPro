@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8407D1601E2D6F0B00749488 /* Location+MKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D15F1E2D6F0B00749488 /* Location+MKAnnotation.swift */; };
+		8407D1631E2D738600749488 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D1611E2D738600749488 /* Location+CoreDataClass.swift */; };
+		8407D1641E2D738600749488 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D1621E2D738600749488 /* Location+CoreDataProperties.swift */; };
 		84425F701E2B62AE0050AA6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425F6F1E2B62AE0050AA6F /* AppDelegate.swift */; };
 		84425F731E2B62AE0050AA6F /* WeatherFrogPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84425F711E2B62AE0050AA6F /* WeatherFrogPro.xcdatamodeld */; };
 		84425F751E2B62AE0050AA6F /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425F741E2B62AE0050AA6F /* MasterViewController.swift */; };
@@ -56,6 +59,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8407D15F1E2D6F0B00749488 /* Location+MKAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+MKAnnotation.swift"; path = "DataModels/Location+MKAnnotation.swift"; sourceTree = "<group>"; };
+		8407D1611E2D738600749488 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataClass.swift"; path = "DataModels/Location+CoreDataClass.swift"; sourceTree = "<group>"; };
+		8407D1621E2D738600749488 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "DataModels/Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		84425F6C1E2B62AE0050AA6F /* WeatherFrogPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherFrogPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84425F6F1E2B62AE0050AA6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84425F721E2B62AE0050AA6F /* WeatherFrogPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherFrogPro.xcdatamodel; sourceTree = "<group>"; };
@@ -111,6 +117,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8407D15E1E2D6E5F00749488 /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				8407D1611E2D738600749488 /* Location+CoreDataClass.swift */,
+				8407D1621E2D738600749488 /* Location+CoreDataProperties.swift */,
+				8407D15F1E2D6F0B00749488 /* Location+MKAnnotation.swift */,
+			);
+			name = DataModels;
+			sourceTree = "<group>";
+		};
 		84425F631E2B62AD0050AA6F = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +162,7 @@
 				84425FA71E2B6A7D0050AA6F /* BaseControllers */,
 				84425FAF1E2B6EEB0050AA6F /* Menu */,
 				84425FB61E2B6FF90050AA6F /* Content */,
+				8407D15E1E2D6E5F00749488 /* DataModels */,
 			);
 			path = WeatherFrogPro;
 			sourceTree = "<group>";
@@ -342,9 +359,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8407D1641E2D738600749488 /* Location+CoreDataProperties.swift in Sources */,
 				84425FA61E2B6A730050AA6F /* SplitViewController.swift in Sources */,
 				84425FAE1E2B6C730050AA6F /* NavigationController.swift in Sources */,
 				84425FB81E2B70300050AA6F /* WeatherCollectionController.swift in Sources */,
+				8407D1631E2D738600749488 /* Location+CoreDataClass.swift in Sources */,
 				84425F731E2B62AE0050AA6F /* WeatherFrogPro.xcdatamodeld in Sources */,
 				84425F701E2B62AE0050AA6F /* AppDelegate.swift in Sources */,
 				84D4B4AC1E2B9E2D00C8AE45 /* MapSearchTableController.swift in Sources */,
@@ -355,6 +374,7 @@
 				84425FB31E2B6FDA0050AA6F /* MapViewController.swift in Sources */,
 				84425FB51E2B6FED0050AA6F /* SettingsViewController.swift in Sources */,
 				84425FBA1E2B705E0050AA6F /* ForecastViewController.swift in Sources */,
+				8407D1601E2D6F0B00749488 /* Location+MKAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
