@@ -52,7 +52,7 @@ class MapSearchTableController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell: MapSearchCell? = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? MapSearchCell ?? UITableViewCell(style:.subtitle, reuseIdentifier: cellIdentifier) as? MapSearchCell
+        let cell: MapSearchCell? = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? MapSearchCell
         // Configure the cell...
         cell!.mapItem = self.matchingItems[indexPath.row]
         return cell!
