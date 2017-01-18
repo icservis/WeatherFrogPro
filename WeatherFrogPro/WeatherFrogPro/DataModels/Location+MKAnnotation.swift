@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import CoreLocation
 import MapKit
 
 extension Location : MKAnnotation {
     
     public var coordinate: CLLocationCoordinate2D {
         get {
-            return CLLocationCoordinate2DMake(self.latitude, self.longitude)
+            let placemark: CLPlacemark? = self.placemark! as CLPlacemark
+            return (placemark?.location!.coordinate)!
         }
     }
     public var title: String? {

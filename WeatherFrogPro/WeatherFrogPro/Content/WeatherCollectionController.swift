@@ -44,14 +44,14 @@ class WeatherCollectionController: UICollectionViewController {
     
     func configureView() {
         // Update the user interface for the detail item.
-        if let weather = self.weatherItem {
+        if let pin = self.mapItem {
             if let label = self.timestampLabel {
-                label.text = weather.timestamp!.description
+                label.text = pin.timestamp!.description
             }
         }
     }
     
-    var weatherItem: Weather? {
+    var mapItem: Location? {
         didSet {
             // Update the view.
             self.configureView()
