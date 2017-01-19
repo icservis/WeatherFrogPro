@@ -61,6 +61,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="vC3-pB-5Vb" kind="showDetail" identifier="showItem" id="sTz-87-UEM"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -69,18 +72,22 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="add" id="1f5-gu-q6b"/>
+                        <barButtonItem systemItem="add" id="1f5-gu-q6b">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="2y0-tm-rZi" id="9xw-Rr-9Hu"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="LT6-nd-evM"/>
                         <barButtonItem title="Map" id="d3e-dS-4ie">
                             <connections>
-                                <segue destination="zIR-xj-eqy" kind="presentation" id="jTE-86-GBo"/>
+                                <segue destination="zIR-xj-eqy" kind="presentation" identifier="showMap" id="jTE-86-GBo"/>
                             </connections>
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Placemarks" id="FNO-7G-RbW">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="HcU-Vs-PX8">
                             <connections>
-                                <segue destination="Ps3-Pi-3ag" kind="popoverPresentation" popoverAnchorBarButtonItem="HcU-Vs-PX8" id="Idz-9M-zcy">
+                                <segue destination="Ps3-Pi-3ag" kind="popoverPresentation" identifier="showSettings" popoverAnchorBarButtonItem="HcU-Vs-PX8" id="Idz-9M-zcy">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -257,4 +264,7 @@
             <point key="canvasLocation" x="2556" y="-358.4707646176912"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="sTz-87-UEM"/>
+    </inferredMetricsTieBreakers>
 </document>

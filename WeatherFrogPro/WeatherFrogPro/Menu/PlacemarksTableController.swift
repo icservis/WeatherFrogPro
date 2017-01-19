@@ -8,56 +8,36 @@
 
 import UIKit
 import CoreData
+import CoreLocation
+import MapKit
 
 class PlacemarksTableController: UITableViewController , NSFetchedResultsControllerDelegate {
     
     var managedObjectContext: NSManagedObjectContext? = nil
+    
+    let locationManager = CLLocationManager()
+    let geocoder = CLGeocoder()
+    var placemark : CLPlacemark? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+         //self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-
-    func insertNewObject(_ sender: Any) {
-        let context = self.fetchedResultsController.managedObjectContext
-        let newEvent = Location(context: context)
-        
-        // If appropriate, configure the new managed object.
-        newEvent.timestamp = NSDate()
-        
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-        }
-    }
-    
-    // MARK: - Segues
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = self.fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! WeatherCollectionController
-                controller.mapItem = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
-                controller.navigationItem.leftItemsSupplementBackButton = true
-            }
-        }
     }
     
     // MARK: - Table View
@@ -72,7 +52,8 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PlacemarkCell", for: indexPath)
+        cell.accessoryType = .detailButton
         let item = self.fetchedResultsController.object(at: indexPath)
         self.configureCell(cell, withItem: item)
         return cell
@@ -99,8 +80,14 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
         }
     }
     
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let item = self.fetchedResultsController.object(at: indexPath)
+        performSegue(withIdentifier: "showMap", sender: item)
+    }
+    
     func configureCell(_ cell: UITableViewCell, withItem location: Location) {
-        cell.textLabel!.text = location.timestamp!.description
+        cell.textLabel!.text = location.title
+        cell.detailTextLabel?.text = location.subtitle
     }
     
     // MARK: - Fetched results controller
@@ -171,17 +158,89 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
         self.tableView.endUpdates()
     }
     
-    /*
-     // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
-     
-     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-     // In the simplest, most efficient, case, reload the table view.
-     self.tableView.reloadData()
-     }
-     */
+    // MARK: - Handling Persistent objects
+    
+    func insertNewPlacemark(_ placemark: CLPlacemark) {
+        let context = self.fetchedResultsController.managedObjectContext
+        let newLocation = Location(context: context)
+        
+        newLocation.placemark = placemark
+        newLocation.timestamp = NSDate()
+        
+        // Save the context.
+        do {
+            try context.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+    }
+    
+    // MARK: - Segues
     
     @IBAction func unwind(_ segue: UIStoryboardSegue) {
         print("unwind to: %@", segue)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showItem" {
+            if let indexPath = self.tableView.indexPathForSelectedRow {
+                let object = self.fetchedResultsController.object(at: indexPath)
+                let controller = (segue.destination as! UINavigationController).topViewController as! WeatherCollectionController
+                controller.location = object
+                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
+                controller.navigationItem.leftItemsSupplementBackButton = true
+            }
+        }
+        
+        if segue.identifier == "showMap" {
+            let controller = (segue.destination as! UINavigationController).topViewController as! MapViewController
+            controller.mapStoreDelegate = self
+            
+            if let location = sender as? Location {
+                controller.location = location
+            }
+            
+        }
+    }
+    
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        if self.placemark != nil {
+            self.insertNewPlacemark(self.placemark!)
+        }
+    }
+    
+}
 
+extension PlacemarksTableController : MapStore {
+    func store(pin: MKPlacemark) {
+        self.insertNewPlacemark(pin)
+    }
+}
+
+extension PlacemarksTableController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.startUpdatingLocation()
+        } else if status == .denied || status == .restricted {
+            locationManager.stopUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let  location = locations.last {
+            geocoder.reverseGeocodeLocation(location, completionHandler: {
+                placemarks, error in
+                self.placemark = placemarks?.first
+            })
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error:" + error.localizedDescription)
+    }
+    
 }

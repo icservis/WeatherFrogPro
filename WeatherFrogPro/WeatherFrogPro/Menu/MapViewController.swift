@@ -8,18 +8,19 @@
 
 import UIKit
 import MapKit
-import CoreLocation
 
 
 class MapViewController: UIViewController {
     
     var searchController : UISearchController? = nil
     
-    var selectedPin: MKMapItem? = nil;
+    var mapStoreDelegate : MapStore? = nil
+    
+    var location : Location? = nil
+    var selectedPlacemark : MKPlacemark? = nil
     
     @IBOutlet weak var mapView: MKMapView!
     
-    let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +41,13 @@ class MapViewController: UIViewController {
         self.navigationItem.titleView = searchBar
         searchBar.delegate = locationSearchTable
         
-        self.locationManager.delegate = self
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestLocation()
         self.mapView?.showsUserLocation = true
+        
+        if let location = self.location {
+            self.selectedPlacemark = MKPlacemark(coordinate: (location.placemark!.location?.coordinate)!, addressDictionary: location.placemark?.addressDictionary as! [String : Any]?)
+            self.showAnnotation(with: self.selectedPlacemark!)
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,69 +55,57 @@ class MapViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func showAnnotation(with placemark: MKPlacemark) {
+        
+        self.mapView.removeAnnotations(self.mapView.annotations)
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        annotation.title = placemark.name
+        annotation.subtitle = (placemark.addressDictionary!["FormattedAddressLines"] as! [String]).joined(separator: ", ")
+        self.mapView.addAnnotation(annotation)
+        
+        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+        let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
+        self.mapView.setRegion(region, animated: true)
+        
     }
-    */
-
-    
 
 }
 
-// MARK: - Location
+protocol MapStore {
+    func store(pin: MKPlacemark)
+}
 
-
-extension MapViewController: CLLocationManagerDelegate {
+extension MapViewController : MKMapViewDelegate {
     
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.requestLocation()
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
         }
+        let reuseId = "pin"
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+        pinView?.pinTintColor = UIColor.orange
+        pinView?.canShowCallout = true
+        let button = UIButton(type: .contactAdd)
+        //button.addTarget(self, action: "getDirections", for: .touchUpInside)
+        pinView?.leftCalloutAccessoryView = button
+        return pinView
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations.last
-        let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1))
-        self.mapView.setRegion(region, animated: true)
-        self.locationManager.stopUpdatingLocation()
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        self.mapStoreDelegate?.store(pin: self.selectedPlacemark!)
     }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error:" + error.localizedDescription)
-    }
-    
 }
 
 extension MapViewController : HandleSearchMap {
     
     func dropPinZoomIn(to mapItem: MKMapItem) {
-        self.selectedPin = mapItem
         
-        self.mapView.removeAnnotations(self.mapView.annotations)
         self.searchController?.isActive = false
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = mapItem.placemark.coordinate
-        annotation.title = mapItem.name
-        annotation.subtitle = (mapItem.placemark.addressDictionary!["FormattedAddressLines"] as! [String]).joined(separator: ", ")
-        self.mapView.addAnnotation(annotation)
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: mapItem.placemark.coordinate, span: span)
-        self.mapView.setRegion(region, animated: true)
-        
+        self.selectedPlacemark = mapItem.placemark
+        self.showAnnotation(with: self.selectedPlacemark!)
     }
-    
-}
-
-extension MapViewController : MKMapViewDelegate {
     
 }
 

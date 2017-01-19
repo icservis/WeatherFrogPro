@@ -39,19 +39,16 @@ class WeatherCollectionController: UICollectionViewController {
     }
     */
     
-    @IBOutlet weak var timestampLabel: UILabel!
     
     
     func configureView() {
         // Update the user interface for the detail item.
-        if let pin = self.mapItem {
-            if let label = self.timestampLabel {
-                label.text = pin.timestamp!.description
-            }
+        if let location = self.location {
+            self.navigationItem.title = location.title
         }
     }
     
-    var mapItem: Location? {
+    var location: Location? {
         didSet {
             // Update the view.
             self.configureView()
