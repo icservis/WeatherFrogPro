@@ -28,6 +28,7 @@
 		84425FBA1E2B705E0050AA6F /* ForecastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425FB91E2B705E0050AA6F /* ForecastViewController.swift */; };
 		84734F931E2E3DF900C6291A /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84734F911E2E3DF900C6291A /* Location+CoreDataClass.swift */; };
 		84734F941E2E3DF900C6291A /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84734F921E2E3DF900C6291A /* Location+CoreDataProperties.swift */; };
+		847360F41E31567D00D836E2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 847360F31E31567D00D836E2 /* .gitignore */; };
 		84D4B4AC1E2B9E2D00C8AE45 /* MapSearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D4B4AB1E2B9E2D00C8AE45 /* MapSearchTableController.swift */; };
 		84E48D741E2BD873000708D3 /* MapSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E48D721E2BD873000708D3 /* MapSearchCell.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		84734F901E2E3C6000C6291A /* WeatherFrogPro 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "WeatherFrogPro 2.xcdatamodel"; sourceTree = "<group>"; };
 		84734F911E2E3DF900C6291A /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataClass.swift"; path = "DataModels/Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		84734F921E2E3DF900C6291A /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "DataModels/Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		847360F31E31567D00D836E2 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 		84D4B4A91E2B84E200C8AE45 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D4B4AB1E2B9E2D00C8AE45 /* MapSearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapSearchTableController.swift; path = Menu/MapSearchTableController.swift; sourceTree = "<group>"; };
 		84E48D721E2BD873000708D3 /* MapSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapSearchCell.swift; path = Menu/MapSearchCell.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		84425F631E2B62AD0050AA6F = {
 			isa = PBXGroup;
 			children = (
+				847360F31E31567D00D836E2 /* .gitignore */,
 				84425F6E1E2B62AE0050AA6F /* WeatherFrogPro */,
 				84425F8E1E2B64800050AA6F /* WeatherToday */,
 				84425F8B1E2B64800050AA6F /* Frameworks */,
@@ -332,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				847360F41E31567D00D836E2 /* .gitignore in Resources */,
 				84425F9D1E2B65EC0050AA6F /* Settings.bundle in Resources */,
 				84425F7F1E2B62AE0050AA6F /* LaunchScreen.storyboard in Resources */,
 				84425F7C1E2B62AE0050AA6F /* Assets.xcassets in Resources */,
