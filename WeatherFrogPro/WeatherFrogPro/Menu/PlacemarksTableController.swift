@@ -188,7 +188,7 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
     // MARK: - Segues
     
     @IBAction func unwind(_ segue: UIStoryboardSegue) {
-        print("unwind to: %@", segue)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -250,6 +250,7 @@ extension PlacemarksTableController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let  location = locations.last {
+            if geocoder.isGeocoding { return }
             geocoder.reverseGeocodeLocation(location, completionHandler: {
                 placemarks, error in
                 if let placemark = placemarks?.first {

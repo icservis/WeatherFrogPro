@@ -71,9 +71,9 @@ class MapViewController: UIViewController {
         annotation.title = placemark.name
         annotation.subtitle = (placemark.addressDictionary!["FormattedAddressLines"] as! [String]).joined(separator: ", ")
         self.mapView.addAnnotation(annotation)
-        
-        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-        let region = MKCoordinateRegion(center: placemark.coordinate, span: span)
+        self.mapView.selectAnnotation(annotation, animated: true)
+        let distance : CLLocationDistance = 5000
+        let region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, distance, distance)
         self.mapView.setRegion(region, animated: true)
         
     }
@@ -125,16 +125,17 @@ extension MapViewController : MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
         if newState == .ending {
             let location = CLLocation(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
+            if geocoder.isGeocoding { return }
             geocoder.reverseGeocodeLocation(location, completionHandler: {
                 placemarks, error in
                 if let placemark = placemarks?.first {
                     self.selectedPlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: placemark.addressDictionary as! [String:Any]?)
-                    self.showAnnotation(with: self.selectedPlacemark!)
-                }
-                if let pinView = view as? MKPinAnnotationView {
-                    if pinView.tag == 1 {
-                        self.mapStoreDelegate?.update(pin: self.selectedPlacemark!)
+                    if let pinView = view as? MKPinAnnotationView {
+                        if pinView.tag == 1 {
+                            self.mapStoreDelegate?.update(pin: self.selectedPlacemark!)
+                        }
                     }
+                    self.showAnnotation(with: self.selectedPlacemark!)
                 }
             })
         }
@@ -159,6 +160,7 @@ extension MapViewController : UIGestureRecognizerDelegate {
             let touchLocation = gestureRecogniser.location(in: self.mapView)
             let locationCoordinate = self.mapView.convert(touchLocation, toCoordinateFrom: self.mapView)
             let location = CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
+            if geocoder.isGeocoding { return }
             geocoder.reverseGeocodeLocation(location, completionHandler: {
                 placemarks, error in
                 if let placemark = placemarks?.first {
