@@ -252,7 +252,10 @@ extension PlacemarksTableController: CLLocationManagerDelegate {
         if let  location = locations.last {
             geocoder.reverseGeocodeLocation(location, completionHandler: {
                 placemarks, error in
-                self.placemark = placemarks?.first
+                if let placemark = placemarks?.first {
+                    self.placemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: placemark.addressDictionary as! [String:Any]?)
+                }
+                
             })
         }
     }

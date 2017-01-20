@@ -44,6 +44,11 @@ class MapViewController: UIViewController {
         searchBar.delegate = locationSearchTable
         
         self.mapView?.showsUserLocation = true
+        let longPressGestureRecogniser = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGestureRecogniser.minimumPressDuration = 0.5
+        longPressGestureRecogniser.delaysTouchesBegan = true
+        longPressGestureRecogniser.delegate = self
+        self.mapView.addGestureRecognizer(longPressGestureRecogniser)
         
         if let placemark = self.location?.placemark {
             
@@ -123,7 +128,7 @@ extension MapViewController : MKMapViewDelegate {
             geocoder.reverseGeocodeLocation(location, completionHandler: {
                 placemarks, error in
                 if let placemark = placemarks?.first {
-                    self.selectedPlacemark = MKPlacemark(coordinate: (placemark.location?.coordinate)!, addressDictionary: placemark.addressDictionary as! [String : Any]?)
+                    self.selectedPlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: placemark.addressDictionary as! [String:Any]?)
                     self.showAnnotation(with: self.selectedPlacemark!)
                 }
                 if let pinView = view as? MKPinAnnotationView {
@@ -145,5 +150,24 @@ extension MapViewController : HandleSearchMap {
         self.showAnnotation(with: self.selectedPlacemark!)
     }
     
+}
+
+extension MapViewController : UIGestureRecognizerDelegate {
+    
+    func handleLongPress(gestureRecogniser: UILongPressGestureRecognizer) {
+        if gestureRecogniser.state == .ended {
+            let touchLocation = gestureRecogniser.location(in: self.mapView)
+            let locationCoordinate = self.mapView.convert(touchLocation, toCoordinateFrom: self.mapView)
+            let location = CLLocation(latitude: locationCoordinate.latitude, longitude: locationCoordinate.longitude)
+            geocoder.reverseGeocodeLocation(location, completionHandler: {
+                placemarks, error in
+                if let placemark = placemarks?.first {
+                    self.selectedPlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: placemark.addressDictionary as! [String:Any]?)
+                    self.showAnnotation(with: self.selectedPlacemark!)
+                }
+            })
+            
+        }
+    }
 }
 
