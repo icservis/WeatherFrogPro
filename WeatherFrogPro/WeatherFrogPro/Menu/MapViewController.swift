@@ -16,6 +16,8 @@ class MapViewController: UIViewController {
     
     var mapStoreDelegate : MapStore? = nil
     
+    let geocoder = CLGeocoder()
+    
     var location : Location? = nil
     var selectedPlacemark : MKPlacemark? = nil
     
@@ -43,8 +45,9 @@ class MapViewController: UIViewController {
         
         self.mapView?.showsUserLocation = true
         
-        if let location = self.location {
-            self.selectedPlacemark = MKPlacemark(coordinate: (location.placemark!.location?.coordinate)!, addressDictionary: location.placemark?.addressDictionary as! [String : Any]?)
+        if let placemark = self.location?.placemark {
+            
+            self.selectedPlacemark = MKPlacemark(coordinate: (placemark.location?.coordinate)!, addressDictionary: placemark.addressDictionary as! [String : Any]?)
             self.showAnnotation(with: self.selectedPlacemark!)
         }
 
@@ -74,6 +77,7 @@ class MapViewController: UIViewController {
 
 protocol MapStore {
     func store(pin: MKPlacemark)
+    func update(pin: MKPlacemark)
 }
 
 extension MapViewController : MKMapViewDelegate {
@@ -85,16 +89,50 @@ extension MapViewController : MKMapViewDelegate {
         let reuseId = "pin"
         var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
         pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-        pinView?.pinTintColor = UIColor.orange
         pinView?.canShowCallout = true
-        let button = UIButton(type: .contactAdd)
-        //button.addTarget(self, action: "getDirections", for: .touchUpInside)
-        pinView?.leftCalloutAccessoryView = button
+        pinView?.isDraggable = true
+        
+        let annotationLocation = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
+        if let locationLocation = self.location?.placemark?.location {
+            let distance = locationLocation.distance(from: annotationLocation)
+            let isStoredLocation = distance < kCLLocationAccuracyNearestTenMeters
+            if isStoredLocation {
+                pinView?.tag = 1
+                pinView?.pinTintColor = MKPinAnnotationView.greenPinColor()
+            } else {
+                pinView?.tag = 0
+                pinView?.pinTintColor = MKPinAnnotationView.purplePinColor()
+                pinView?.leftCalloutAccessoryView = UIButton(type: .contactAdd)
+            }
+        } else {
+            pinView?.pinTintColor = MKPinAnnotationView.purplePinColor()
+            pinView?.leftCalloutAccessoryView = UIButton(type: .contactAdd)
+        }
+        
         return pinView
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         self.mapStoreDelegate?.store(pin: self.selectedPlacemark!)
+        self.showAnnotation(with: self.selectedPlacemark!)
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+        if newState == .ending {
+            let location = CLLocation(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
+            geocoder.reverseGeocodeLocation(location, completionHandler: {
+                placemarks, error in
+                if let placemark = placemarks?.first {
+                    self.selectedPlacemark = MKPlacemark(coordinate: (placemark.location?.coordinate)!, addressDictionary: placemark.addressDictionary as! [String : Any]?)
+                    self.showAnnotation(with: self.selectedPlacemark!)
+                }
+                if let pinView = view as? MKPinAnnotationView {
+                    if pinView.tag == 1 {
+                        self.mapStoreDelegate?.update(pin: self.selectedPlacemark!)
+                    }
+                }
+            })
+        }
     }
 }
 

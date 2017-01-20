@@ -160,21 +160,28 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
     
     // MARK: - Handling Persistent objects
     
-    func insertNewPlacemark(_ placemark: CLPlacemark) {
+    func insertNewPlacemark(_ placemark: CLPlacemark) -> Location? {
         let context = self.fetchedResultsController.managedObjectContext
         let newLocation = Location(context: context)
         
         newLocation.placemark = placemark
         newLocation.timestamp = NSDate()
         
-        // Save the context.
-        do {
-            try context.save()
-        } catch {
-            // Replace this implementation with code to handle the error appropriately.
-            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            let nserror = error as NSError
-            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        save()
+        return newLocation
+    }
+    
+    func save() {
+        let context = self.fetchedResultsController.managedObjectContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
         }
     }
     
@@ -208,7 +215,8 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         if self.placemark != nil {
-            self.insertNewPlacemark(self.placemark!)
+            let item = self.insertNewPlacemark(self.placemark!)
+            performSegue(withIdentifier: "showMap", sender: item)
         }
     }
     
@@ -216,7 +224,17 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
 
 extension PlacemarksTableController : MapStore {
     func store(pin: MKPlacemark) {
-        self.insertNewPlacemark(pin)
+        let location = self.insertNewPlacemark(pin)
+        if let mapViewController = (self.presentedViewController as? NavigationController)?.topViewController as? MapViewController {
+            mapViewController.location = location
+        }
+    }
+    func update(pin: MKPlacemark) {
+        if let mapViewController = (self.presentedViewController as? NavigationController)?.topViewController as? MapViewController {
+            let location = mapViewController.location
+            location?.placemark = pin
+            self.save()
+        }
     }
 }
 
