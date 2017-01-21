@@ -8,9 +8,17 @@
 
 import UIKit
 
+
 private let reuseIdentifier = "Cell"
 
 class WeatherCollectionController: UICollectionViewController {
+    
+    var dataManager : DataManager
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.dataManager = DataManager()
+        super.init(coder: aDecoder)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

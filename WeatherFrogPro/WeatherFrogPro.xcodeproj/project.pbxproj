@@ -30,6 +30,8 @@
 		84734F931E2E3DF900C6291A /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84734F911E2E3DF900C6291A /* Location+CoreDataClass.swift */; };
 		84734F941E2E3DF900C6291A /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84734F921E2E3DF900C6291A /* Location+CoreDataProperties.swift */; };
 		847360F41E31567D00D836E2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 847360F31E31567D00D836E2 /* .gitignore */; };
+		84B82E161E3361A900EAFA7E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B82E151E3361A900EAFA7E /* DataManager.swift */; };
+		84B82E181E33633D00EAFA7E /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B82E171E33633D00EAFA7E /* Cache.swift */; };
 		84D4B4AC1E2B9E2D00C8AE45 /* MapSearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D4B4AB1E2B9E2D00C8AE45 /* MapSearchTableController.swift */; };
 		84E48D741E2BD873000708D3 /* MapSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E48D721E2BD873000708D3 /* MapSearchCell.swift */; };
 		D5F3A3060297478B2C471E5C /* Pods_WeatherToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8771C638A4CE34A18B709E3E /* Pods_WeatherToday.framework */; };
@@ -97,6 +99,8 @@
 		84734F911E2E3DF900C6291A /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataClass.swift"; path = "DataModels/Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		84734F921E2E3DF900C6291A /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Location+CoreDataProperties.swift"; path = "DataModels/Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		847360F31E31567D00D836E2 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
+		84B82E151E3361A900EAFA7E /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		84B82E171E33633D00EAFA7E /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cache.swift; path = DataModels/Cache.swift; sourceTree = "<group>"; };
 		84D4B4A91E2B84E200C8AE45 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D4B4AB1E2B9E2D00C8AE45 /* MapSearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapSearchTableController.swift; path = Menu/MapSearchTableController.swift; sourceTree = "<group>"; };
 		84E48D721E2BD873000708D3 /* MapSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapSearchCell.swift; path = Menu/MapSearchCell.swift; sourceTree = "<group>"; };
@@ -132,6 +136,7 @@
 				84734F911E2E3DF900C6291A /* Location+CoreDataClass.swift */,
 				84734F921E2E3DF900C6291A /* Location+CoreDataProperties.swift */,
 				8407D15F1E2D6F0B00749488 /* Location+MKAnnotation.swift */,
+				84B82E171E33633D00EAFA7E /* Cache.swift */,
 			);
 			name = DataModels;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				84425F6F1E2B62AE0050AA6F /* AppDelegate.swift */,
+				84B82E151E3361A900EAFA7E /* DataManager.swift */,
 				84425F781E2B62AE0050AA6F /* Main.storyboard */,
 				84425F7B1E2B62AE0050AA6F /* Assets.xcassets */,
 				84425F7D1E2B62AE0050AA6F /* LaunchScreen.storyboard */,
@@ -466,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84734F941E2E3DF900C6291A /* Location+CoreDataProperties.swift in Sources */,
+				84B82E161E3361A900EAFA7E /* DataManager.swift in Sources */,
 				84425FA61E2B6A730050AA6F /* SplitViewController.swift in Sources */,
 				84425FAE1E2B6C730050AA6F /* NavigationController.swift in Sources */,
 				84425FB81E2B70300050AA6F /* WeatherCollectionController.swift in Sources */,
@@ -474,6 +481,7 @@
 				84425F701E2B62AE0050AA6F /* AppDelegate.swift in Sources */,
 				84D4B4AC1E2B9E2D00C8AE45 /* MapSearchTableController.swift in Sources */,
 				84E48D741E2BD873000708D3 /* MapSearchCell.swift in Sources */,
+				84B82E181E33633D00EAFA7E /* Cache.swift in Sources */,
 				84425FB11E2B6F280050AA6F /* PlacemarksTableController.swift in Sources */,
 				84425FB31E2B6FDA0050AA6F /* MapViewController.swift in Sources */,
 				84425FB51E2B6FED0050AA6F /* SettingsViewController.swift in Sources */,
