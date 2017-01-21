@@ -85,19 +85,19 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
         performSegue(withIdentifier: "showMap", sender: item)
     }
     
-    func configureCell(_ cell: UITableViewCell, withItem location: Location) {
+    func configureCell(_ cell: UITableViewCell, withItem location: Point) {
         cell.textLabel!.text = location.title
         cell.detailTextLabel?.text = location.subtitle
     }
     
     // MARK: - Fetched results controller
     
-    var fetchedResultsController: NSFetchedResultsController<Location> {
+    var fetchedResultsController: NSFetchedResultsController<Point> {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
         }
         
-        let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
+        let fetchRequest: NSFetchRequest<Point> = Point.fetchRequest()
         
         // Set the batch size to a suitable number.
         fetchRequest.fetchBatchSize = 20
@@ -124,7 +124,7 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
         
         return _fetchedResultsController!
     }
-    var _fetchedResultsController: NSFetchedResultsController<Location>? = nil
+    var _fetchedResultsController: NSFetchedResultsController<Point>? = nil
     
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
@@ -148,7 +148,7 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
         case .delete:
             tableView.deleteRows(at: [indexPath!], with: .fade)
         case .update:
-            self.configureCell(tableView.cellForRow(at: indexPath!)!, withItem: anObject as! Location)
+            self.configureCell(tableView.cellForRow(at: indexPath!)!, withItem: anObject as! Point)
         case .move:
             tableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
@@ -160,9 +160,9 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
     
     // MARK: - Handling Persistent objects
     
-    func insertNewPlacemark(_ placemark: CLPlacemark) -> Location? {
+    func insertNewPlacemark(_ placemark: CLPlacemark) -> Point? {
         let context = self.fetchedResultsController.managedObjectContext
-        let newLocation = Location(context: context)
+        let newLocation = Point(context: context)
         
         newLocation.placemark = placemark
         newLocation.timestamp = NSDate()
@@ -196,7 +196,7 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.object(at: indexPath)
                 let controller = (segue.destination as! UINavigationController).topViewController as! WeatherCollectionController
-                controller.location = object
+                controller.point = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
             }
@@ -206,8 +206,8 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
             let controller = (segue.destination as! UINavigationController).topViewController as! MapViewController
             controller.mapStoreDelegate = self
             
-            if let location = sender as? Location {
-                controller.location = location
+            if let point = sender as? Point {
+                controller.point = point
             }
             
         }
@@ -224,15 +224,15 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
 
 extension PlacemarksTableController : MapStore {
     func store(pin: MKPlacemark) {
-        let location = self.insertNewPlacemark(pin)
+        let point = self.insertNewPlacemark(pin)
         if let mapViewController = (self.presentedViewController as? NavigationController)?.topViewController as? MapViewController {
-            mapViewController.location = location
+            mapViewController.point = point
         }
     }
     func update(pin: MKPlacemark) {
         if let mapViewController = (self.presentedViewController as? NavigationController)?.topViewController as? MapViewController {
-            let location = mapViewController.location
-            location?.placemark = pin
+            let point = mapViewController.point
+            point?.placemark = pin
             self.save()
         }
     }

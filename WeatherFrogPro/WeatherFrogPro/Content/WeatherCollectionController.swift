@@ -7,16 +7,21 @@
 //
 
 import UIKit
-
+import ForecastIO
+import CoreLocation
 
 private let reuseIdentifier = "Cell"
 
 class WeatherCollectionController: UICollectionViewController {
     
     var dataManager : DataManager
+    let client : DarkSkyClient
     
     required init?(coder aDecoder: NSCoder) {
         self.dataManager = DataManager()
+        self.client = DarkSkyClient(apiKey: "65bc74d73ce003bdb16501dfcaddefb2")
+        self.client.language = .czech
+        self.client.units = .auto
         super.init(coder: aDecoder)
     }
 
@@ -51,12 +56,18 @@ class WeatherCollectionController: UICollectionViewController {
     
     func configureView() {
         // Update the user interface for the detail item.
-        if let location = self.location {
-            self.navigationItem.title = location.title
+        if let point = self.point {
+            self.navigationItem.title = point.title
+            
+            if let location = point.placemark?.location {
+                self.client.getForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, completion: { (result) in
+                    print(result)
+                })
+            }
         }
     }
     
-    var location: Location? {
+    var point: Point? {
         didSet {
             // Update the view.
             self.configureView()

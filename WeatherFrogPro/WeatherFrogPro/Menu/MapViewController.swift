@@ -18,7 +18,7 @@ class MapViewController: UIViewController {
     
     let geocoder = CLGeocoder()
     
-    var location : Location? = nil
+    var point : Point? = nil
     var selectedPlacemark : MKPlacemark? = nil
     
     @IBOutlet weak var mapView: MKMapView!
@@ -50,8 +50,7 @@ class MapViewController: UIViewController {
         longPressGestureRecogniser.delegate = self
         self.mapView.addGestureRecognizer(longPressGestureRecogniser)
         
-        if let placemark = self.location?.placemark {
-            
+        if let placemark = self.point?.placemark {
             self.selectedPlacemark = MKPlacemark(coordinate: (placemark.location?.coordinate)!, addressDictionary: placemark.addressDictionary as! [String : Any]?)
             self.showAnnotation(with: self.selectedPlacemark!)
         }
@@ -98,7 +97,7 @@ extension MapViewController : MKMapViewDelegate {
         pinView?.isDraggable = true
         
         let annotationLocation = CLLocation(latitude: annotation.coordinate.latitude, longitude: annotation.coordinate.longitude)
-        if let locationLocation = self.location?.placemark?.location {
+        if let locationLocation = self.point?.placemark?.location {
             let distance = locationLocation.distance(from: annotationLocation)
             let isStoredLocation = distance < kCLLocationAccuracyNearestTenMeters
             if isStoredLocation {

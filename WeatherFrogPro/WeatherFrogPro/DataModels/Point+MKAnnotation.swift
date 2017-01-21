@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import MapKit
 
-extension Location : MKAnnotation {
+extension Point : MKAnnotation {
     
     public var coordinate: CLLocationCoordinate2D {
         get {
