@@ -633,7 +633,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 68C2157C021C3A6D165AC47C /* Pods-WeatherFrogPro.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
@@ -650,7 +649,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 650AB7D80AECD06D578C9BFF /* Pods-WeatherFrogPro.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
