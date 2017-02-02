@@ -173,22 +173,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ARz-15-0KQ">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="ARz-15-0KQ">
                             <size key="itemSize" width="150" height="150"/>
                             <size key="headerReferenceSize" width="50" height="123"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <inset key="sectionInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ForecastCell" id="yPI-iC-aCq" customClass="ForecastCell" customModule="WeatherFrogPro">
-                                <rect key="frame" x="0.0" y="123" width="150" height="150"/>
+                                <rect key="frame" x="10" y="123" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M6S-dG-Yjm">
-                                            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M6S-dG-Yjm">
+                                            <rect key="frame" x="20" y="20" width="110" height="110"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2K-4g-idO">
                                             <rect key="frame" x="56.5" y="20" width="37.5" height="18"/>
@@ -202,9 +202,9 @@
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzI-q0-wRf">
-                                            <rect key="frame" x="24" y="51.5" width="103.5" height="48"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="40"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="uzI-q0-wRf">
+                                            <rect key="frame" x="34" y="56" width="83" height="38.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -212,13 +212,13 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="Hbd-JR-nxX" firstAttribute="centerX" secondItem="yPI-iC-aCq" secondAttribute="centerX" id="2tV-Ec-V5p"/>
-                                    <constraint firstAttribute="trailing" secondItem="M6S-dG-Yjm" secondAttribute="trailing" id="9tX-Z4-WWb"/>
+                                    <constraint firstAttribute="trailing" secondItem="M6S-dG-Yjm" secondAttribute="trailing" constant="20" id="9tX-Z4-WWb"/>
                                     <constraint firstItem="m2K-4g-idO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yPI-iC-aCq" secondAttribute="leadingMargin" constant="4" id="M85-dB-0xU"/>
-                                    <constraint firstItem="M6S-dG-Yjm" firstAttribute="leading" secondItem="yPI-iC-aCq" secondAttribute="leading" id="MzW-kj-fyB"/>
-                                    <constraint firstItem="M6S-dG-Yjm" firstAttribute="top" secondItem="yPI-iC-aCq" secondAttribute="top" id="V0A-Yu-kSv"/>
+                                    <constraint firstItem="M6S-dG-Yjm" firstAttribute="leading" secondItem="yPI-iC-aCq" secondAttribute="leading" constant="20" id="MzW-kj-fyB"/>
+                                    <constraint firstItem="M6S-dG-Yjm" firstAttribute="top" secondItem="yPI-iC-aCq" secondAttribute="top" constant="20" id="V0A-Yu-kSv"/>
                                     <constraint firstItem="m2K-4g-idO" firstAttribute="centerX" secondItem="yPI-iC-aCq" secondAttribute="centerX" id="cL7-Nw-oPf"/>
                                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="m2K-4g-idO" secondAttribute="trailing" constant="4" id="ctG-Vy-gHb"/>
-                                    <constraint firstAttribute="bottom" secondItem="M6S-dG-Yjm" secondAttribute="bottom" id="dp2-Mh-QI1"/>
+                                    <constraint firstAttribute="bottom" secondItem="M6S-dG-Yjm" secondAttribute="bottom" constant="20" id="dp2-Mh-QI1"/>
                                     <constraint firstItem="Hbd-JR-nxX" firstAttribute="top" relation="greaterThanOrEqual" secondItem="m2K-4g-idO" secondAttribute="bottom" constant="12" id="ind-Hh-VLG"/>
                                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Hbd-JR-nxX" secondAttribute="trailing" constant="4" id="mef-Ip-f55"/>
                                     <constraint firstAttribute="bottomMargin" secondItem="Hbd-JR-nxX" secondAttribute="bottom" id="p4W-NP-DVi"/>
@@ -228,10 +228,10 @@
                                     <constraint firstItem="Hbd-JR-nxX" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="yPI-iC-aCq" secondAttribute="leadingMargin" constant="4" id="yY5-Au-mAa"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="dayLabel" destination="m2K-4g-idO" id="zzZ-9O-9mW"/>
                                     <outlet property="iconView" destination="M6S-dG-Yjm" id="5Uj-NC-SIM"/>
                                     <outlet property="summaryLabel" destination="Hbd-JR-nxX" id="gba-K6-W9D"/>
                                     <outlet property="temperatureLabel" destination="uzI-q0-wRf" id="5ex-yl-9mF"/>
+                                    <outlet property="timeLabel" destination="m2K-4g-idO" id="eOH-TX-kVN"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -239,7 +239,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="123"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ahf-5Z-hfo">
+                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ahf-5Z-hfo">
                                     <rect key="frame" x="8" y="8" width="359" height="107"/>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jv6-I7-qwb">
@@ -260,8 +260,8 @@
                                 <constraint firstItem="ahf-5Z-hfo" firstAttribute="trailing" secondItem="bs4-0Z-0MS" secondAttribute="trailingMargin" id="yfd-wb-nox"/>
                             </constraints>
                             <connections>
-                                <outlet property="imageView" destination="ahf-5Z-hfo" id="WrV-pN-eUb"/>
-                                <outlet property="titleLabel" destination="jv6-I7-qwb" id="NnY-Ev-rg6"/>
+                                <outlet property="iconView" destination="ahf-5Z-hfo" id="mUa-dH-QvG"/>
+                                <outlet property="summaryLabel" destination="jv6-I7-qwb" id="jM0-93-Vlo"/>
                             </connections>
                         </collectionReusableView>
                         <connections>

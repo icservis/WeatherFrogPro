@@ -43,6 +43,22 @@ class WeatherCollectionController: UICollectionViewController {
         formatter.doesRelativeDateFormatting = true
         return formatter
     }()
+    
+    lazy var temperatureFormatter = { () -> NumberFormatter in
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencySymbol = "°C"
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
+    
+    lazy var speedFormatter = { () -> NumberFormatter in
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.currencySymbol = "m/s"
+        formatter.maximumFractionDigits = 1
+        return formatter
+    }()
 
 
     override func viewDidLoad() {
@@ -77,8 +93,26 @@ class WeatherCollectionController: UICollectionViewController {
             self.navigationItem.title = point.title
             if let location = point.placemark?.location {
                 self.client.getForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, completion: { (result) in
-                    self.forecast = result.value.0
-                    self.collectionView?.reloadData()
+                    DispatchQueue.main.async {
+                        self.forecast = result.value.0
+                        if let timezone = self.forecast?.timezone {
+                            self.timeFormatter.timeZone = TimeZone.init(identifier: timezone)
+                        }
+                        if let units = self.forecast?.flags?.units {
+                            switch units {
+                                case .uk:
+                                    self.speedFormatter.currencySymbol = "mph"
+                                case .ca:
+                                    self.speedFormatter.currencySymbol = "kph"
+                                case .us:
+                                    self.temperatureFormatter.currencySymbol = "F"
+                                    self.speedFormatter.currencySymbol = "mph"
+                                default:
+                                    break
+                            }
+                        }
+                        self.collectionView?.reloadData()
+                    }
                 })
             }
         }
@@ -138,10 +172,14 @@ class WeatherCollectionController: UICollectionViewController {
                     cell.summaryLabel.text = summary
                 }
                 
-                cell.dayLabel.text = self.timeFormatter.string(from: dataPoint.time)
+                cell.timeLabel.text = self.timeFormatter.string(from: dataPoint.time)
                 
                 if let temperature = dataPoint.temperature {
-                    cell.temperatureLabel.text = String(temperature)
+                    cell.temperatureLabel.text = self.temperatureFormatter.string(for: temperature)
+                }
+                
+                if let icon = dataPoint.icon {
+                    cell.iconView.image = UIImage.init(named: icon.rawValue)
                 }
                 
             }
@@ -157,7 +195,11 @@ class WeatherCollectionController: UICollectionViewController {
         if let hourly = self.forecast?.hourly {
             
             if let summary = hourly.summary {
-                view.titleLabel.text = summary
+                view.summaryLabel.text = summary
+            }
+            
+            if let icon = hourly.icon {
+                view.iconView.image = UIImage.init(named: icon.rawValue)
             }
         }
         
