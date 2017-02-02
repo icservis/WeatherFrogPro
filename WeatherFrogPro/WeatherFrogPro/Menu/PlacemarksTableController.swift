@@ -192,6 +192,7 @@ class PlacemarksTableController: UITableViewController , NSFetchedResultsControl
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "showItem" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.object(at: indexPath)

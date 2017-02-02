@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		3D8FDEE394646858989F25A5 /* Pods_WeatherFrogPro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7E6F4C9CAAF21E1771EB7323 /* Pods_WeatherFrogPro.framework */; };
 		8407D1601E2D6F0B00749488 /* Point+MKAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8407D15F1E2D6F0B00749488 /* Point+MKAnnotation.swift */; };
+		84377E1A1E426ED000CA0925 /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84377E191E426ED000CA0925 /* ForecastCell.swift */; };
+		84377E1C1E426FFE00CA0925 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84377E1B1E426FFE00CA0925 /* WeatherView.swift */; };
 		84425F701E2B62AE0050AA6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84425F6F1E2B62AE0050AA6F /* AppDelegate.swift */; };
 		84425F731E2B62AE0050AA6F /* WeatherFrogPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84425F711E2B62AE0050AA6F /* WeatherFrogPro.xcdatamodeld */; };
 		84425F7A1E2B62AE0050AA6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84425F781E2B62AE0050AA6F /* Main.storyboard */; };
@@ -67,6 +69,8 @@
 		68C2157C021C3A6D165AC47C /* Pods-WeatherFrogPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherFrogPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherFrogPro/Pods-WeatherFrogPro.debug.xcconfig"; sourceTree = "<group>"; };
 		7E6F4C9CAAF21E1771EB7323 /* Pods_WeatherFrogPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherFrogPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8407D15F1E2D6F0B00749488 /* Point+MKAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Point+MKAnnotation.swift"; path = "DataModels/Point+MKAnnotation.swift"; sourceTree = "<group>"; };
+		84377E191E426ED000CA0925 /* ForecastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ForecastCell.swift; path = Content/ForecastCell.swift; sourceTree = "<group>"; };
+		84377E1B1E426FFE00CA0925 /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherView.swift; path = Content/WeatherView.swift; sourceTree = "<group>"; };
 		84425F6C1E2B62AE0050AA6F /* WeatherFrogPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherFrogPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84425F6F1E2B62AE0050AA6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84425F721E2B62AE0050AA6F /* WeatherFrogPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WeatherFrogPro.xcdatamodel; sourceTree = "<group>"; };
@@ -230,6 +234,8 @@
 			children = (
 				84425FB71E2B70300050AA6F /* WeatherCollectionController.swift */,
 				84425FB91E2B705E0050AA6F /* ForecastViewController.swift */,
+				84377E191E426ED000CA0925 /* ForecastCell.swift */,
+				84377E1B1E426FFE00CA0925 /* WeatherView.swift */,
 			);
 			name = Content;
 			sourceTree = "<group>";
@@ -486,7 +492,9 @@
 				84425FB31E2B6FDA0050AA6F /* MapViewController.swift in Sources */,
 				84425FB51E2B6FED0050AA6F /* SettingsViewController.swift in Sources */,
 				84425FBA1E2B705E0050AA6F /* ForecastViewController.swift in Sources */,
+				84377E1C1E426FFE00CA0925 /* WeatherView.swift in Sources */,
 				8407D1601E2D6F0B00749488 /* Point+MKAnnotation.swift in Sources */,
+				84377E1A1E426ED000CA0925 /* ForecastCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

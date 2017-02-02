@@ -7,8 +7,22 @@
 //
 
 import UIKit
+import ForecastIO
 
 class ForecastViewController: UIViewController {
+    
+    var data : DataPoint? {
+        didSet {
+            print(data ?? "no value")
+            
+            if (data != nil) {
+                self.navigationItem.title = String(describing: data!.time)
+            } else {
+                self.navigationItem.title = nil
+            }
+            
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

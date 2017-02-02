@@ -10,29 +10,46 @@ import UIKit
 import ForecastIO
 import CoreLocation
 
-private let reuseIdentifier = "Cell"
+private let weatherReuseIdentifier = "WeatherView"
+private let forecastReuseIdentifier = "ForecastCell"
 
 class WeatherCollectionController: UICollectionViewController {
     
-    var dataManager : DataManager
     let client : DarkSkyClient
     
+    var forecast : Forecast? {
+        didSet {
+            print(forecast ?? "nil")
+        }
+    }
+    
+    @IBOutlet weak var refreshButton: UIBarButtonItem!
+    
+    @IBAction func refreshTapped(_ sender: UIBarButtonItem) {
+        self.configureView()
+    }
+    
     required init?(coder aDecoder: NSCoder) {
-        self.dataManager = DataManager()
         self.client = DarkSkyClient(apiKey: "65bc74d73ce003bdb16501dfcaddefb2")
         self.client.language = .czech
         self.client.units = .auto
         super.init(coder: aDecoder)
     }
+    
+    lazy var timeFormatter = { () -> DateFormatter in
+        let formatter = DateFormatter()
+        formatter.dateStyle = .short
+        formatter.timeStyle = .short
+        formatter.doesRelativeDateFormatting = true
+        return formatter
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //self.clearsSelectionOnViewWillAppear = false
 
         // Do any additional setup after loading the view.
     }
@@ -58,10 +75,10 @@ class WeatherCollectionController: UICollectionViewController {
         // Update the user interface for the detail item.
         if let point = self.point {
             self.navigationItem.title = point.title
-            
             if let location = point.placemark?.location {
                 self.client.getForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, completion: { (result) in
-                    print(result)
+                    self.forecast = result.value.0
+                    self.collectionView?.reloadData()
                 })
             }
         }
@@ -73,43 +90,102 @@ class WeatherCollectionController: UICollectionViewController {
             self.configureView()
         }
     }
+    
+    @IBAction func unwind(_ segue: UIStoryboardSegue) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "showForecast" {
+            let controller = (segue.destination as! UINavigationController).topViewController as! ForecastViewController
+            
+            if sender is ForecastCell {
+                if let indexPath = self.collectionView?.indexPath(for: sender as! ForecastCell) {
+                    if let dataPoint = self.forecast?.hourly?.data[indexPath.item] as DataPoint? {
+                        controller.data = dataPoint
+                    }
+                }
+            }
+        }
+    }
+    
 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        if let data = self.forecast?.hourly?.data {
+            return data.count
+        }
         return 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: forecastReuseIdentifier, for: indexPath) as! ForecastCell
     
         // Configure the cell
+        if let data = self.forecast?.hourly?.data {
+            if let dataPoint = data[indexPath.item] as DataPoint? {
+                
+                if let summary = dataPoint.summary {
+                    cell.summaryLabel.text = summary
+                }
+                
+                cell.dayLabel.text = self.timeFormatter.string(from: dataPoint.time)
+                
+                if let temperature = dataPoint.temperature {
+                    cell.temperatureLabel.text = String(temperature)
+                }
+                
+            }
+        }
     
         return cell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: weatherReuseIdentifier, for: indexPath) as! WeatherView
+        
+        // Configure the view
+        if let hourly = self.forecast?.hourly {
+            
+            if let summary = hourly.summary {
+                view.titleLabel.text = summary
+            }
+        }
+        
+        return view
+    }
 
     // MARK: UICollectionViewDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let forecastCell = collectionView.cellForItem(at: indexPath) as! ForecastCell? {
+            self.performSegue(withIdentifier: "showForecast", sender: forecastCell)
+        }
+    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    */
+ 
 
-    /*
+    
     // Uncomment this method to specify if the specified item should be selected
     override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
-    */
+     */
+    
 
     /*
     // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
@@ -124,6 +200,7 @@ class WeatherCollectionController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
     }
-    */
+ */
+    
 
 }
