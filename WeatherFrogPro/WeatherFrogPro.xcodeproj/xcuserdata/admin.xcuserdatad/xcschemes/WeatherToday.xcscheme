@@ -44,13 +44,23 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "84CF88071F7655AF007FF555"
+               BuildableName = "WeatherFrogProTests.xctest"
+               BlueprintName = "WeatherFrogProTests"
+               ReferencedContainer = "container:WeatherFrogPro.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "84425F891E2B64800050AA6F"
-            BuildableName = "WeatherToday.appex"
-            BlueprintName = "WeatherToday"
+            BlueprintIdentifier = "84425F6B1E2B62AD0050AA6F"
+            BuildableName = "WeatherFrogPro.app"
+            BlueprintName = "WeatherFrogPro"
             ReferencedContainer = "container:WeatherFrogPro.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
