@@ -548,7 +548,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-WeatherFrogPro/Pods-WeatherFrogPro-resources.sh",
-				"$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle",
+				$PODS_CONFIGURATION_BUILD_DIR/HockeySDK/HockeySDKResources.bundle,
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -835,7 +835,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -851,7 +851,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -866,7 +866,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeatherToday/WeatherToday.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherToday/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -882,7 +882,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeatherToday/WeatherToday.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherToday/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -949,7 +949,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -964,7 +964,7 @@
 				CODE_SIGN_ENTITLEMENTS = WeatherToday/WeatherToday.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherToday/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
 				PRODUCT_NAME = "$(TARGET_NAME)";
