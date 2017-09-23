@@ -1,15 +1,15 @@
 PODS:
-  - Alamofire (4.3.0)
-  - ForecastIO (3.1.0)
+  - Alamofire (4.5.1)
+  - ForecastIO (4.0.0)
 
 DEPENDENCIES:
   - Alamofire
   - ForecastIO
 
 SPEC CHECKSUMS:
-  Alamofire: 856a113053a7bc9cbe5d6367a555d773fc5cfef7
-  ForecastIO: ef82e67a1c5af3de6cb8358b89505b83db1c6db2
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  ForecastIO: d449959139efdc9a2c111a2dba691a67706bb619
 
 PODFILE CHECKSUM: ab9881272a4fa9c6e6e92744197e6afcf8883037
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.3.1
