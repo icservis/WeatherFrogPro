@@ -34,6 +34,8 @@
 		847360F41E31567D00D836E2 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 847360F31E31567D00D836E2 /* .gitignore */; };
 		84B82E161E3361A900EAFA7E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B82E151E3361A900EAFA7E /* DataManager.swift */; };
 		84B82E181E33633D00EAFA7E /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B82E171E33633D00EAFA7E /* Cache.swift */; };
+		84CF88021F76502D007FF555 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CF88011F76502D007FF555 /* CloudKit.framework */; };
+		84CF88031F765075007FF555 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CF88011F76502D007FF555 /* CloudKit.framework */; };
 		84D4B4AC1E2B9E2D00C8AE45 /* MapSearchTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D4B4AB1E2B9E2D00C8AE45 /* MapSearchTableController.swift */; };
 		84E48D741E2BD873000708D3 /* MapSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E48D721E2BD873000708D3 /* MapSearchCell.swift */; };
 		D5F3A3060297478B2C471E5C /* Pods_WeatherToday.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8771C638A4CE34A18B709E3E /* Pods_WeatherToday.framework */; };
@@ -105,6 +107,7 @@
 		847360F31E31567D00D836E2 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = .gitignore; path = ../.gitignore; sourceTree = "<group>"; };
 		84B82E151E3361A900EAFA7E /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		84B82E171E33633D00EAFA7E /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cache.swift; path = DataModels/Cache.swift; sourceTree = "<group>"; };
+		84CF88011F76502D007FF555 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		84D4B4A91E2B84E200C8AE45 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D4B4AB1E2B9E2D00C8AE45 /* MapSearchTableController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapSearchTableController.swift; path = Menu/MapSearchTableController.swift; sourceTree = "<group>"; };
 		84E48D721E2BD873000708D3 /* MapSearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapSearchCell.swift; path = Menu/MapSearchCell.swift; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84CF88021F76502D007FF555 /* CloudKit.framework in Frameworks */,
 				84425FA21E2B663E0050AA6F /* MapKit.framework in Frameworks */,
 				3D8FDEE394646858989F25A5 /* Pods_WeatherFrogPro.framework in Frameworks */,
 			);
@@ -126,6 +130,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84CF88031F765075007FF555 /* CloudKit.framework in Frameworks */,
 				84425F8D1E2B64800050AA6F /* NotificationCenter.framework in Frameworks */,
 				D5F3A3060297478B2C471E5C /* Pods_WeatherToday.framework in Frameworks */,
 			);
@@ -189,6 +194,7 @@
 		84425F8B1E2B64800050AA6F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84CF88011F76502D007FF555 /* CloudKit.framework */,
 				84425FA11E2B663E0050AA6F /* MapKit.framework */,
 				84425F8C1E2B64800050AA6F /* NotificationCenter.framework */,
 				7E6F4C9CAAF21E1771EB7323 /* Pods_WeatherFrogPro.framework */,
@@ -302,7 +308,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Libor Kučera";
 				TargetAttributes = {
 					84425F6B1E2B62AD0050AA6F = {
@@ -560,7 +566,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -568,7 +576,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -591,7 +603,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -611,7 +623,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -619,7 +633,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -636,7 +654,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -649,13 +667,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 68C2157C021C3A6D165AC47C /* Pods-WeatherFrogPro.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.weatherfrog2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -665,13 +684,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 650AB7D80AECD06D578C9BFF /* Pods-WeatherFrogPro.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
 				DEVELOPMENT_TEAM = PH3V9JYRDW;
 				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.weatherfrog2";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -686,7 +706,7 @@
 				INFOPLIST_FILE = WeatherToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.weatherfrog2.weathertoday";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
@@ -702,12 +722,95 @@
 				INFOPLIST_FILE = WeatherToday/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.weatherfrog2.weathertoday";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
+		};
+		84CF87FE1F764FF0007FF555 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AdHoc;
+		};
+		84CF87FF1F764FF0007FF555 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 650AB7D80AECD06D578C9BFF /* Pods-WeatherFrogPro.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = WeatherFrogPro/WeatherFrogPro.entitlements;
+				DEVELOPMENT_TEAM = PH3V9JYRDW;
+				INFOPLIST_FILE = WeatherFrogPro/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = AdHoc;
+		};
+		84CF88001F764FF0007FF555 /* AdHoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D5067FB3540AB8AE31B79AB /* Pods-WeatherToday.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = WeatherToday/WeatherToday.entitlements;
+				DEVELOPMENT_TEAM = PH3V9JYRDW;
+				INFOPLIST_FILE = WeatherToday/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ic-servis.WeatherFrogPro.WeatherToday";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = AdHoc;
 		};
 /* End XCBuildConfiguration section */
 
@@ -717,6 +820,7 @@
 			buildConfigurations = (
 				84425F811E2B62AE0050AA6F /* Debug */,
 				84425F821E2B62AE0050AA6F /* Release */,
+				84CF87FE1F764FF0007FF555 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -726,6 +830,7 @@
 			buildConfigurations = (
 				84425F841E2B62AE0050AA6F /* Debug */,
 				84425F851E2B62AE0050AA6F /* Release */,
+				84CF87FF1F764FF0007FF555 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -735,6 +840,7 @@
 			buildConfigurations = (
 				84425F991E2B64800050AA6F /* Debug */,
 				84425F9A1E2B64800050AA6F /* Release */,
+				84CF88001F764FF0007FF555 /* AdHoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
