@@ -10,7 +10,6 @@ target 'WeatherFrogPro' do
   pod 'IGListKit'
   pod 'HockeySDK'
   pod 'Result'
-  pod 'Swinject'
   pod 'Sourcery'
 
     target 'WeatherFrogProTests' do
@@ -25,7 +24,6 @@ target 'WeatherToday' do
   # Pods for WeatherToday
   pod 'IGListKit'
   pod 'Result'
-  pod 'Swinject'
   pod 'Sourcery'
 
 end
