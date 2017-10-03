@@ -1,0 +1,57 @@
+// Generated using SwiftGen, by O.Halligon — https://github.com/SwiftGen/SwiftGen
+
+{% if tables.first.levels %}
+{% set enumName %}{{param.enumName|default:"L10n"}}{% endset %}
+import Foundation
+
+// swiftlint:disable file_length, line_length
+protocol {{enumName}}Translatable {
+    static func tr(_ key: String, _ args: CVarArg...) -> String
+}
+
+// default implementation, could be overrided by extension {{enumName}}
+fileprivate extension {{enumName}}Translatable {
+    static func tr(_ key: String, _ args: CVarArg...) -> String {
+        let format = NSLocalizedString(key, bundle: Bundle(for: {{enumName}}BundleToken.self), comment: "")
+        return String(format: format, locale: Locale.current, arguments: args)
+    }
+}
+
+{% macro parametersBlock types %}{% for type in types %}_ {{type|lowerFirstWord}}{{forloop.counter}}: {{type}}{% if not forloop.last %}, {% endif %}{% endfor %}{% endmacro %}
+{% macro argumentsBlock types %}{% for type in types %}{{type|lowerFirstWord}}{{forloop.counter}}{% if not forloop.last %}, {% endif %}{% endfor %}{% endmacro %}
+{% macro recursiveBlock item %}
+  {% for string in item.strings %}
+  /// {{string.translation}}
+  {% if string.types %}
+  static func {{string.key|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}}({% call parametersBlock string.types %}) -> String {
+    return self.tr("{{string.key}}", {% call argumentsBlock string.types %})
+  }
+  {% else %}
+  case {{string.key|swiftIdentifier|snakeToCamelCase|lowerFirstWord|escapeReservedKeywords}} = "{{string.key}}"
+  {% endif %}
+  {% endfor %}
+  {% for child in item.children %}
+  {% call recursiveBlock child %}
+  {% endfor %}
+{% endmacro %}
+
+// swiftlint:disable:next type_body_length
+
+enum {{enumName}}: String {
+  {% call recursiveBlock tables.first.levels %}
+}
+
+extension {{enumName}}: {{enumName}}Translatable {}
+
+extension {{enumName}}: CustomStringConvertible {
+  var description: String { return self.string }
+
+  var string: String { return {{enumName}}.tr(rawValue) }
+}
+
+typealias L = {{enumName}}
+
+private final class {{enumName}}BundleToken {}
+{% else %}
+// No string found
+{% endif %}

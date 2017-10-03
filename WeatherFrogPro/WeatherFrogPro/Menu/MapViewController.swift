@@ -51,7 +51,7 @@ class MapViewController: UIViewController {
         self.mapView.addGestureRecognizer(longPressGestureRecogniser)
         
         if let placemark = self.point?.placemark {
-            self.selectedPlacemark = MKPlacemark(coordinate: (placemark.location?.coordinate)!, addressDictionary: placemark.addressDictionary as! [String : Any]?)
+            self.selectedPlacemark = MKPlacemark(placemark: placemark)
             self.showAnnotation(with: self.selectedPlacemark!)
         }
 
@@ -68,7 +68,11 @@ class MapViewController: UIViewController {
         let annotation = MKPointAnnotation()
         annotation.coordinate = placemark.coordinate
         annotation.title = placemark.name
-        annotation.subtitle = (placemark.addressDictionary!["FormattedAddressLines"] as! [String]).joined(separator: ", ")
+        if #available(iOS 11.0, *) {
+            annotation.subtitle = placemark.postalAddress?.description
+        } else {
+            annotation.subtitle = (placemark.addressDictionary!["FormattedAddressLines"] as! [String]).joined(separator: ", ")
+        }
         self.mapView.addAnnotation(annotation)
         self.mapView.selectAnnotation(annotation, animated: true)
         let distance : CLLocationDistance = 5000
@@ -128,7 +132,7 @@ extension MapViewController : MKMapViewDelegate {
             geocoder.reverseGeocodeLocation(location, completionHandler: {
                 placemarks, error in
                 if let placemark = placemarks?.first {
-                    self.selectedPlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: placemark.addressDictionary as! [String:Any]?)
+                    self.selectedPlacemark = MKPlacemark(placemark: placemark)
                     if let pinView = view as? MKPinAnnotationView {
                         if pinView.tag == 1 {
                             self.mapStoreDelegate?.update(pin: self.selectedPlacemark!)
@@ -163,7 +167,7 @@ extension MapViewController : UIGestureRecognizerDelegate {
             geocoder.reverseGeocodeLocation(location, completionHandler: {
                 placemarks, error in
                 if let placemark = placemarks?.first {
-                    self.selectedPlacemark = MKPlacemark(coordinate: location.coordinate, addressDictionary: placemark.addressDictionary as! [String:Any]?)
+                    self.selectedPlacemark = MKPlacemark(placemark: placemark)
                     self.showAnnotation(with: self.selectedPlacemark!)
                 }
             })

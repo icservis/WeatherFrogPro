@@ -11,6 +11,7 @@ target 'WeatherFrogPro' do
   pod 'HockeySDK'
   pod 'Result'
   pod 'Sourcery'
+  pod 'Swinject'
 
     target 'WeatherFrogProTests' do
         inherit! :search_paths
@@ -25,5 +26,6 @@ target 'WeatherToday' do
   pod 'IGListKit'
   pod 'Result'
   pod 'Sourcery'
+  pod 'Swinject'
 
 end

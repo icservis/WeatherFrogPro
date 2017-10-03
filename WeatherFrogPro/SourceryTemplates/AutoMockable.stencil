@@ -1,0 +1,26 @@
+@testable import csob_ceb_ios
+import UIKit
+
+{% for type in types.protocols|annotated:"AutoMockable" %}
+class {{ type.name }}Mock: {{ type.name }} {
+    {% for variable in type.allVariables %}
+    var {{ variable.name }}: {{ variable.typeName }}{% if not variable.isOptional %}{% if variable.isArray %} = []{% endif %}{% if variable.isDictionary %} = [:]{% endif %}{% endif %}
+    {% endfor %}
+    init({% for variable in type.allVariables %}{{ variable.name }}: {{ variable.typeName }}{% if not forloop.last%}, {% endif %}{% endfor %}) {
+    {% for variable in type.allVariables %}
+        {% if not variable.isOptional and not variable.isArray and not variable.isDictionary %}self.{{ variable.name }} = {{ variable.name }}{% endif %}
+    {% endfor %}
+    }
+    {% for method in type.allMethods|!annotated:"redeclaration" %}
+    //MARK: - {{ method.callName }}
+    {% if not method.callName == "init" %}var {{ method.callName }}{% for param in method.parameters %}{{ param.argumentLabel|upperFirst }}{% endfor %}Called = false{% endif %}
+    {% if method.parameters.count == 1 %}var {{ method.callName }}Received{% for param in method.parameters %}{{ param.name|upperFirst }}: {{ param.typeName.unwrappedTypeName }}?{% endfor %}{% else %}{% if not method.parameters.count == 0 %}var {{ method.callName }}ReceivedArguments: ({% for param in method.parameters %}{{ param.name }}: {% if param.typeAttributes.escaping %}{{ param.unwrappedTypeName }}{% else %}{{ param.typeName }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %})? {% endif %} {% endif %}
+    {% if not method.returnTypeName.isVoid and not method.callName == "init" %}var {{ method.callName }}ReturnValue: {{ method.returnTypeName }}{% if not method.returnTypeName.isOptional %}!{% endif %}{% endif %}
+    {% if not method.callName == "init" %}func {% endif %}{{ method.shortName }}({% for param in method.parameters %}{% if param.argumentLabel == nil %}_{% else %}{{ param.argumentLabel }}{% endif %}{% if not param.argumentLabel == param.name %} {{ param.name }}{% endif %}: {{ param.typeName }}{% if not forloop.last %}, {% endif %}{% endfor %}){% if not method.returnTypeName.isVoid %} -> {{ method.returnTypeName }}{% endif %} {
+        {% if not method.callName == "init" %}{{ method.callName }}{% for param in method.parameters %}{{ param.argumentLabel|upperFirst }}{% endfor %}Called = true{% endif %}
+        {%if method.parameters.count == 1 %}{{ method.callName }}Received{% for param in method.parameters %}{{ param.name|upperFirst }} = {{ param.name }}{% endfor %}{% else %}{% if not method.parameters.count == 0 %}{{ method.callName }}ReceivedArguments = ({% for param in method.parameters %}{{ param.name }}: {{ param.name }}{% if not forloop.last%}, {% endif %}{% endfor %}){% endif %}{% if not method.returnTypeName.isVoid %}{% endif %}{% endif %}
+        {% if not method.returnTypeName.isVoid and not method.callName == "init" %}return {{ method.callName }}ReturnValue{% endif %}
+    }
+{% endfor %}
+}
+{% endfor %}
