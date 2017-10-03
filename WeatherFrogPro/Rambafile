@@ -4,7 +4,6 @@ company: IC Servis, s.r.o.
 ### Xcode project settings
 project_name: WeatherFrogPro
 xcodeproj_path: WeatherFrogPro.xcodeproj
-prefix: no
 
 ### Code generation settings section
 # The main project target name
@@ -22,3 +21,4 @@ templates:
 - {name: rviper_controller}
 - {name: mvvm_controller}
 - {name: swifty_viper}
+- {name: swinject}
