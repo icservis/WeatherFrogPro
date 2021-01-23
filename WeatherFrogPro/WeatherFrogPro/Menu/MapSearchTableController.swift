@@ -116,7 +116,7 @@ extension MapSearchTableController: UISearchResultsUpdating {
         guard let mapView = mapView, let searchBarText = searchController.searchBar.text else {
             return
         }
-        let request = MKLocalSearchRequest()
+        let request = MKLocalSearch.Request()
         request.region = mapView.region
         request.naturalLanguageQuery = searchBarText
         

@@ -92,9 +92,10 @@ class WeatherCollectionController: UICollectionViewController {
         if let point = self.point {
             self.navigationItem.title = point.title
             if let location = point.placemark?.location {
-                self.client.getForecast(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, completion: { (result) in
+                self.client.getForecast(location: location.coordinate, completion: { (result) in
                     DispatchQueue.main.async {
-                        self.forecast = result.value.0
+                        guard case let .success(value) = result else { return }
+                        self.forecast = value.0
                         if let timezone = self.forecast?.timezone {
                             self.timeFormatter.timeZone = TimeZone.init(identifier: timezone)
                         }

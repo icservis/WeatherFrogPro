@@ -1,6 +1,6 @@
 ![ForecastIO](header.png)
 
-![Swift](http://img.shields.io/badge/swift-3.0-brightgreen.svg)
+![Swift](https://img.shields.io/badge/Swift-5.0-brightgreen.svg)
 [![CI Status](http://img.shields.io/travis/sxg/ForecastIO.svg?style=flat)](https://travis-ci.org/sxg/ForecastIO)
 [![Documentation](https://img.shields.io/cocoapods/metrics/doc-percent/ForecastIO.svg)](http://cocoadocs.org/docsets/ForecastIO/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
@@ -70,6 +70,8 @@ The following units are supported:
 - UK
 - Auto (uses the local units for the location for which you are requesting weather data)
 
+More details about the units of each property are available [in the Dark Sky API docs](https://darksky.net/dev/docs/forecast).
+
 You can also choose the language that you want `Forecast` responses to use:
 
 ```swift
@@ -81,12 +83,13 @@ Many languages are supported (a full list is available [here](https://darksky.ne
 With the `DarkSkyClient`, you can make two kinds of requests. The first will get the current `Forecast` for a particular location:
 
 ```swift
-client.getForecast(latitude: myLat, longitude: myLon) { result in
+let myLoc = CLLocationCoordinate2D(latitude: myLat, longitude: myLon)
+client.getForecast(location: myLoc) { result in
     switch result {
     case .success(let currentForecast, let requestMetadata):
-        //  We got the current forecast!
+        // We got the current forecast!
     case .failure(let error):
-        //  Uh-oh. We have an error!
+        // Uh-oh. We have an error!
     }
 }
 ```
@@ -94,12 +97,13 @@ client.getForecast(latitude: myLat, longitude: myLon) { result in
 The second kind of request is called a time machine request, and it will get a `Forecast` for a particular location at a particular time:
 
 ```swift
-client.getForecast(latitude: myLat, longitude: myLon, time: myTime) { result in
+let myLoc = CLLocationCoordinate2D(latitude: myLat, longitude: myLon)
+client.getForecast(location: myLoc, time: myTime) { result in
     switch result {
     case .success(let forecast, let requestMetadata):
-        //  We got the forecast!
+        // We got the forecast!
     case .failure(let error):
-        //  Uh-oh. We have an error!
+        // Uh-oh. We have an error!
     }
 }
 ```

@@ -35,7 +35,7 @@ class MapViewController: UIViewController {
         
         self.searchController = UISearchController(searchResultsController: locationSearchTable)
         self.searchController!.searchResultsUpdater = locationSearchTable
-        self.searchController!.dimsBackgroundDuringPresentation = true
+        self.searchController!.obscuresBackgroundDuringPresentation = true
         self.searchController!.hidesNavigationBarDuringPresentation = false
         self.definesPresentationContext = true
         
@@ -76,7 +76,7 @@ class MapViewController: UIViewController {
         self.mapView.addAnnotation(annotation)
         self.mapView.selectAnnotation(annotation, animated: true)
         let distance : CLLocationDistance = 5000
-        let region = MKCoordinateRegionMakeWithDistance(placemark.coordinate, distance, distance)
+        let region = MKCoordinateRegion(center: placemark.coordinate, latitudinalMeters: distance, longitudinalMeters: distance)
         self.mapView.setRegion(region, animated: true)
         
     }
@@ -125,7 +125,7 @@ extension MapViewController : MKMapViewDelegate {
         self.showAnnotation(with: self.selectedPlacemark!)
     }
     
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationViewDragState, fromOldState oldState: MKAnnotationViewDragState) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {
         if newState == .ending {
             let location = CLLocation(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!)
             if geocoder.isGeocoding { return }
@@ -158,7 +158,7 @@ extension MapViewController : HandleSearchMap {
 
 extension MapViewController : UIGestureRecognizerDelegate {
     
-    func handleLongPress(gestureRecogniser: UILongPressGestureRecognizer) {
+    @objc func handleLongPress(gestureRecogniser: UILongPressGestureRecognizer) {
         if gestureRecogniser.state == .ended {
             let touchLocation = gestureRecogniser.location(in: self.mapView)
             let locationCoordinate = self.mapView.convert(touchLocation, toCoordinateFrom: self.mapView)

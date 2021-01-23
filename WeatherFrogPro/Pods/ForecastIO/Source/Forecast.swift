@@ -7,15 +7,13 @@
 //
 
 import Foundation
+import CoreLocation
 
 /// The weather data for a location at a specific time.
-public struct Forecast {
+public struct Forecast: Decodable {
     
-    /// The requested latitude.
-    public let latitude: Float
-    
-    /// The requested longitude.
-    public let longitude: Float
+    /// The requested location.
+    public let location: CLLocationCoordinate2D
     
     /// The IANA timezone name for the requested location (e.g. "America/New_York"). Rely on local user settings over this property.
     public let timezone: String
@@ -39,7 +37,7 @@ public struct Forecast {
     public let daily: DataBlock?
     
     /// Data fields associated with a `Forecast`.
-    public enum Field: String {
+    public enum Field: String, Decodable {
         
         /// Current weather conditions.
         case currently = "currently"
@@ -60,51 +58,29 @@ public struct Forecast {
         case flags = "flags"
     }
     
-    /// Creates a new `Forecast` from a JSON object.
+    /// Creates a new `Forecast` from JSON using `Decodable`.
     ///
-    /// - parameter json: A JSON object with keys corresponding to the `Forecast`'s properties.
+    /// - parameter decoder: JSON decoder (provided by `Decodable`).
     ///
-    /// - returns: A new `Forecast` filled with data from the given JSON object.
-    public init(fromJSON json: NSDictionary) {
-        latitude = json["latitude"] as! Float
-        longitude = json["longitude"] as! Float
-        timezone = json["timezone"] as! String
-        
-        if let jsonCurrently = json["currently"] as? NSDictionary {
-            currently = DataPoint(fromJSON: jsonCurrently)
-        } else {
-            currently = nil
-        }
-        if let jsonMinutely = json["minutely"] as? NSDictionary {
-            minutely = DataBlock(fromJSON: jsonMinutely)
-        } else {
-            minutely = nil
-        }
-        if let jsonHourly = json["hourly"] as? NSDictionary {
-            hourly = DataBlock(fromJSON: jsonHourly)
-        } else {
-            hourly = nil
-        }
-        if let jsonDaily = json["daily"] as? NSDictionary {
-            daily = DataBlock(fromJSON: jsonDaily)
-        } else {
-            daily = nil
-        }
-        
-        if let jsonAlerts = json["alerts"] as? [NSDictionary] {
-            var tempAlerts = [Alert]()
-            for jsonAlert in jsonAlerts {
-                tempAlerts.append(Alert(fromJSON: jsonAlert))
-            }
-            alerts = tempAlerts
-        } else {
-            alerts = nil
-        }
-        
-        if let jsonFlags = json["flags"] as? NSDictionary {
-            flags = Flag(fromJSON: jsonFlags)
-        } else {
-            flags = nil
-        }
+    /// - returns: A new `Forecast` configured by the requested JSON.
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.timezone = try container.decode(String.self, forKey: .timezone)
+        self.alerts = try container.decodeIfPresent([Alert].self, forKey: .alerts)
+        self.flags = try container.decodeIfPresent(Flag.self, forKey: .flags)
+        self.currently = try container.decodeIfPresent(DataPoint.self, forKey: .currently)
+        self.minutely = try container.decodeIfPresent(DataBlock.self, forKey: .minutely)
+        self.hourly = try container.decodeIfPresent(DataBlock.self, forKey: .hourly)
+        self.daily = try container.decodeIfPresent(DataBlock.self, forKey: .daily)
+        let lat = try container.decode(Double.self, forKey: .latitude)
+        let lon = try container.decode(Double.self, forKey: .longitude)
+        self.location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
+    
+    /// Map `Forecast`'s properties to JSON keys.
+    private enum CodingKeys: String, CodingKey {
+        case timezone, alerts, flags, currently, minutely, hourly, daily
+        case latitude, longitude
+    }
+    
 }

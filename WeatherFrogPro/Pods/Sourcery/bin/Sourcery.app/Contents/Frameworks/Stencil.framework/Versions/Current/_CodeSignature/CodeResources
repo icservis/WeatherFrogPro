@@ -6,75 +6,20 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		ZrSLDy4JzH0EmLkkfnCrbkhKEVM=
+		Crr9rtDQjrkAGIcy0fzR3rjgfUg=
 		</data>
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Headers/Stencil-Swift.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			1QggwJnFeEG7+sa1ip0WJg2Vsm0=
-			</data>
-			<key>hash2</key>
-			<data>
-			ni5PtnHn7cKkOjd96FCDkxTIj311FWWkYu1CsZwzj7k=
-			</data>
-		</dict>
-		<key>Headers/Stencil-umbrella.h</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			3qys+NdxFPnhFL8fPNCkvuw2D3E=
-			</data>
-			<key>hash2</key>
-			<data>
-			bwDeAVYbC9kAHSS3B3lpWZOfXBHi0yddaG3y9CJLb00=
-			</data>
-		</dict>
-		<key>Modules/Stencil.swiftmodule/x86_64.swiftdoc</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			v12ugwSI96uSQTI2is2s76VPn90=
-			</data>
-			<key>hash2</key>
-			<data>
-			J8Yn9CPkmQZCcEsDcuvNOXhgcLmw3Zs+C/lJrUpE53w=
-			</data>
-		</dict>
-		<key>Modules/Stencil.swiftmodule/x86_64.swiftmodule</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			PvG+CQnl0R11HP+BW2EtsKaIg1o=
-			</data>
-			<key>hash2</key>
-			<data>
-			kPiLZsomEL7uTvQedVHcmS1V2Bdnkq8KV5GRyhoY6LE=
-			</data>
-		</dict>
-		<key>Modules/module.modulemap</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			DBOKXVmQK9pgOEUWQP2OvIRTlPU=
-			</data>
-			<key>hash2</key>
-			<data>
-			FYwVY0YuGwNlovMhwWmoFrZjh3yGRBmF+jkT0CVW2lc=
-			</data>
-		</dict>
 		<key>Resources/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			ZrSLDy4JzH0EmLkkfnCrbkhKEVM=
+			Crr9rtDQjrkAGIcy0fzR3rjgfUg=
 			</data>
 			<key>hash2</key>
 			<data>
-			QC5or/VMfifRymFcAWngGzkS/46mCxOXMojzidDxxO0=
+			gxHzB65ZQnkXbU/3VGDgncTqMVigxy7xXU8fvJSILkY=
 			</data>
 		</dict>
 	</dict>

@@ -27,7 +27,7 @@ extension Point : MKAnnotation {
     public var subtitle: String? {
         get {
             let placemark: CLPlacemark? = self.placemark! as CLPlacemark
-            return (placemark?.addressDictionary!["FormattedAddressLines"] as! [String]).joined(separator: ", ")
+            return placemark?.postalAddress.debugDescription
         }
     }
     

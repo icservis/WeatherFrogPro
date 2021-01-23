@@ -12,7 +12,7 @@ import Contacts
 
 class MapSearchCell: UITableViewCell {
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
     }
     
@@ -23,7 +23,7 @@ class MapSearchCell: UITableViewCell {
     var mapItem : MKMapItem? = nil {
         didSet {
             self.textLabel?.text = mapItem?.name
-            self.detailTextLabel?.text = (mapItem?.placemark.addressDictionary!["FormattedAddressLines"] as! [String]).joined(separator: ", ")
+            self.detailTextLabel?.text = (mapItem?.placemark.postalAddress?.description)
         }
     }
 

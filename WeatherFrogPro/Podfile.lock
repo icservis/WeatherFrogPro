@@ -1,19 +1,16 @@
 PODS:
-  - Alamofire (4.5.1)
-  - ForecastIO (4.0.0)
-  - HockeySDK (5.0.0):
-    - HockeySDK/DefaultLib (= 5.0.0)
-  - HockeySDK/DefaultLib (5.0.0)
-  - IGListKit (3.1.1):
-    - IGListKit/Default (= 3.1.1)
-  - IGListKit/Default (3.1.1):
-    - IGListKit/Diffing
-  - IGListKit/Diffing (3.1.1)
-  - Nimble (7.0.2)
-  - Quick (1.2.0)
-  - Result (3.2.4)
-  - Sourcery (0.9.0)
-  - Swinject (2.1.1)
+  - Alamofire (5.4.1)
+  - ForecastIO (8.0.0)
+  - HockeySDK (5.1.4):
+    - HockeySDK/DefaultLib (= 5.1.4)
+  - HockeySDK/DefaultLib (5.1.4)
+  - IGListDiffKit (4.0.0)
+  - IGListKit (4.0.0):
+    - IGListDiffKit (= 4.0.0)
+  - Nimble (9.0.0)
+  - Quick (3.0.0)
+  - Sourcery (1.0.2)
+  - Swinject (2.7.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -22,21 +19,32 @@ DEPENDENCIES:
   - IGListKit
   - Nimble
   - Quick
-  - Result
   - Sourcery
   - Swinject
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - ForecastIO
+    - HockeySDK
+    - IGListDiffKit
+    - IGListKit
+    - Nimble
+    - Quick
+    - Sourcery
+    - Swinject
+
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  ForecastIO: d449959139efdc9a2c111a2dba691a67706bb619
-  HockeySDK: 82bf8dcbe1af3c87c24dc98924fcf2e2ba5be8c4
-  IGListKit: cb97f405ae43e59fe1da74271e19427ec20d3c07
-  Nimble: bfe1f814edabba69ff145cb1283e04ed636a67f2
-  Quick: 58d203b1c5e27fff7229c4c1ae445ad7069a7a08
-  Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
-  Sourcery: e3829460a1fa0bcd3b689e6087a89cc063cd2289
-  Swinject: afea49fd95f392b41171669f165842879c48fad6
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
+  ForecastIO: 68f8231be20748446036263a438cc449886a65ca
+  HockeySDK: c2b7e0afce4587af7b6264ab0fd854f5876afaa6
+  IGListDiffKit: 665d6cf43ce726e676013db9c7d6c4294259b6b2
+  IGListKit: fd5a5d21935298f5849fa49d426843cff97b77c7
+  Nimble: 3b4ec3fd40f1dc178058e0981107721c615643d8
+  Quick: 6d9559f40647bc4d510103842ef2fdd882d753e2
+  Sourcery: e8951e8759ef6a3a0cce412db64832dd23343041
+  Swinject: ddf78b8486dd9b71a667b852cad919ab4484478e
 
-PODFILE CHECKSUM: e78bf429c8ea4050f858711086d8db300570233e
+PODFILE CHECKSUM: a00044f0c947026569c94c9836b135192031e080
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.10.0

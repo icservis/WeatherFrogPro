@@ -9,177 +9,153 @@
 import Foundation
 
 /// Weather data for a specific location and time.
-public struct DataPoint {
+public struct DataPoint: Decodable {
 
-    /// The time at which this `DataPoint` occurs.
+    /// The time at which this `DataPoint` begins. `minutely` `DataPoint`s are always aligned to the top of the minute, `hourly` `DataPoint`s to the top of the hour, and `daily` `DataPoint`s to midnight of the day, all according to the local timezone.
     public let time: Date
     
-    /// A human-readable text summary of the weather.
+    /// A human-readable text summary of this `DataPoint`.
     public let summary: String?
     
-    /// A machine-readable summary of the weather suitable for selecting an icon for display.
+    /// A machine-readable text summary of this data point, suitable for selecting an icon for display.
     public let icon: Icon?
     
-    /// The time of the last sunrise before the solar noon closest to local noon on the given day. Only defined on `Forecast`'s `daily` `DataPoint`s. Note: near the poles, this may occur on a different day entirely!
+    /// The time when the sun will rise during a given day. Only defined on `Forecast`'s `daily` `DataPoint`s.
     public let sunriseTime: Date?
     
-    /// The time of the first sunset after the solar noon closest to local noon on the given day. Only defined on `Forecast`'s `daily` `DataPoint`s. Note: near the poles, this may occur on a different day entirely!
+    /// The time when the sun will set during a given day. Only defined on `Forecast`'s `daily` `DataPoint`s.
     public let sunsetTime: Date?
     
-    /// The fractional part of the lunation number of the given day. This can be thought of as the "percentage complete" of the current lunar month. A value of `0` represents a new moon, a value of `0.25` represents a first quarter moon, a value of `0.5` represents a full moon, and a value of `0.75` represents a last quarter moon. The ranges between these values represent waxing crescent, waxing gibbous, waning gibbous, and waning crescent moons, respectively. Only defined on `Forecast`'s `daily` `DataPoint`s.
-    public let moonPhase: Float?
+    /// The fractional part of the lunation number during the given day: a value of `0` corresponds to a new moon, `0.25` to a first quarter moon, `0.5` to a full moon, and `0.75` to a last quarter moon. The ranges in between these represent waxing crescent, waxing gibbous, waning gibbous, and waning crescent moons, respectively. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let moonPhase: Double?
     
-    /// The distance to the nearest storm in miles. This value is *very approximate* and should not be used in scenarios requiring accurate results. A storm distance of `0` doesn't necessarily refer to a storm at the requested location, but rather a storm in the vicinity of the requested location. Only defined on `Forecast`'s `currently` `DataPoint`s.
-    public let nearestStormDistance: Float?
+    /// The approximate distance to the nearest storm. A storm distance of `0` doesn't necessarily refer to a storm at the requested location, but rather a storm in the vicinity of that location. Only defined on `Forecast`'s `currently` `DataPoint`s.
+    public let nearestStormDistance: Double?
     
-    /// The direction of the nearest storm in degrees, with true north at 0º and progressing clockwise. If `nearestStormDistance` is `0`, then this value will be `nil`. The caveats that apply to `nearestStormDistance` apply to this too. Only defined on `Forecast`'s `currently` `DataPoint`s.
-    public let nearestStormBearing: Float?
+    /// The approximate direction of the nearest storm in degrees, with true north at 0º and progressing clockwise. If `nearestStormDistance` is `0`, then this value will be `nil`. Only defined on `Forecast`'s `currently` `DataPoint`s.
+    public let nearestStormBearing: Double?
     
-    /// The average expected intensity in inches of liquid water per hour of precipitation occurring at the given time *conditional on probability* (assuming any precipitation occurs at all). A *very* rough guide is that a value of `0` corresponds to no precipitation, `0.002` corresponds to very light precipitation, `0.017` corresponds to light precipitation, `0.1` corresponds to moderate precipitation, and `0.4` corresponds to heavy precipitation.
-    public let precipitationIntensity: Float?
+    /// The intensity (in inches of liquid water per hour) of precipitation occuring at the given time. This value is *conditional on probability* (that is, assuming any precipitation falls at all) for `minutely` `DataPoint`s, and unconditional otherwise.
+    public let precipitationIntensity: Double?
     
-    /// Maximum expected intensity of precipitation on the given day in inches of liquid water per hour. Only defined on `Forecast`'s `daily` `DataPoint`s.
-    public let precipitationIntensityMax: Float?
+    /// The standard deviation of the distribution of `precipitationIntensity`. This property is only available when the full distribution and not just the expected mean can be estimated with accuracy.
+    public let precipitationIntensityError: Double?
     
-    /// Time at which the maximum expected intensity of precipitation will occur. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    /// The maximum value of `precipitationIntensity` during a given day. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let precipitationIntensityMax: Double?
+    
+    /// The time at which `precipitationIntensityMax` occurs during a given day. Only defined on `Forecast`'s `daily` `DataPoint`s.
     public let precipitationIntensityMaxTime: Date?
     
-    /// Value between `0` and `1` (inclusive) representing the probability of precipitation occurring at the given time.
-    public let precipitationProbability: Float?
+    /// The probability of precipitation occurring, between `0` and `1`, inclusive.
+    public let precipitationProbability: Double?
     
-    /// Type of precipitation occurring at the given time. If `precipIntensity` is `0`, then this will be `nil`.
+    /// The type of precipitation occurring at the given time. If `precipIntensity` is `0`, then this will be `nil`.
     public let precipitationType: Precipitation?
     
-    /// The amount of snowfall accumulation expected to occur on the given day, in inches. This will be `nil` if no accumulation is expected. Only defined on `Forecast`'s `hourly` and `daily` `DataPoint`s.
-    public let precipitationAccumulation: Float?
+    /// The amount of snowfall accumulation expected to occur. This will be `nil` if no accumulation is expected. Only defined on `Forecast`'s `hourly` and `daily` `DataPoint`s.
+    public let precipitationAccumulation: Double?
     
-    /// The temperature at the given time in degrees Fahrenheit. Not defined on `Forecast`'s `daily` `DataPoint`s.
-    public let temperature: Float?
+    /// The air temperature. Not defined on `Forecast`'s `minutely` `DataPoint`s.
+    public let temperature: Double?
     
-    /// The minimum temperature on the given day in degrees Fahrenheit. Only defined on `Forecast`'s `daily` `DataPoint`s.
-    public let temperatureMin: Float?
+    /// The overnight low temperature. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let temperatureLow: Double?
     
-    /// The time at which the minimum temperature will occur on the given day in degrees Fahrenheit. Only defined on `Forecast`'s `daily` `DataPoint`s.
-    public let temperatureMinTime: Date?
+    /// The time at which the overnight low temperature occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let temperatureLowTime: Date?
     
-    /// The maximum temperature on the given day in degrees Fahrenheit. Only defined on `Forecast`'s `daily` `DataPoint`s.
-    public let temperatureMax: Float?
+    /// The daytime high temperature. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let temperatureHigh: Double?
     
-    /// The time at which the maximum temperature will occur on the given day in degrees Fahrenheit. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    /// The time at which the daytime high temperature occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let temperatureHighTime: Date?
+    
+    /// The maximum temperature during a given date. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let temperatureMax: Double?
+    
+    /// The time at which the maximum temperature during a given date occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
     public let temperatureMaxTime: Date?
     
-    /// The apparent or "feels like" temperature at the given time in degrees Fahrenheit. Not defined on `Forecast`'s `daily` `DataPoint`s.
-    public let apparentTemperature: Float?
+    /// The minimum temperature during a given date. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let temperatureMin: Double?
     
-    /// The minimum apparent or "feels like" temperature on the given day in degrees Fahrenheit. Only defined on `Forecast`'s `daily` `DataPoint`s.
-    public let apparentTemperatureMin: Float?
+    /// The time at which the minimum temperature during a given date occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let temperatureMinTime: Date?
     
-    /// The time at which the minimum apparent or "feels like" temperature will occur on the given day in degrees Fahrenheit. Only defined on `Forecast`'s `daily` `DataPoint`s.
-    public let apparentTemperatureMinTime: Date?
+    /// The apparent or "feels like" temperature. Not defined on `Forecast`'s `daily` `DataPoint`s.
+    public let apparentTemperature: Double?
     
-    /// The maximum apparent or "feels like" temperature on the given day in degrees Fahrenheit. Only defined on `Forecast`'s `daily` `DataPoint`s.
-    public let apparentTemperatureMax: Float?
+    /// The overnight low apparent temperature. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let apparentTemperatureLow: Double?
     
-    /// The time at which the maximum apparent or "feels like" temperature will occur on the given day in degrees Fahrenheit. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    /// The time at which the overnight low apparent temperature occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let apparentTemperatureLowTime: Date?
+    
+    /// The daytime high apparent temperature. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let apparentTemperatureHigh: Double?
+    
+    /// The time at which the daytime high apparent temperature occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let apparentTemperatureHighTime: Date?
+    
+    /// The maximum apparent temperature during a given date. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let apparentTemperatureMax: Double?
+    
+    /// The time at which the maximum apparent temperature during a given date occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
     public let apparentTemperatureMaxTime: Date?
     
-    /// The dew point at the given time in degrees Fahrenheit.
-    public let dewPoint: Float?
+    /// The minimum apparent temperature during a given date. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let apparentTemperatureMin: Double?
     
-    /// The wind speed at the given time in miles per hour.
-    public let windSpeed: Float?
+    /// The time at which the minimum apparent temperature during a given date occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let apparentTemperatureMinTime: Date?
     
-    /// The direction that the wind is coming from in degrees, with true north at 0º and progressing clockwise. If `windSpeed` is `0`, then this will be `nil`.
-    public let windBearing: Float?
+    /// The dew point at the given time.
+    public let dewPoint: Double?
     
-    /// Value between `0` and `1` (inclusive) representing the percentage of sky occluded by clouds. A value of `0` corresponds to a clear sky, `0.4` corresponds to scattered clouds, `0.75` correspond to broken cloud cover, and `1` corresponds to completely overcast skies.
-    public let cloudCover: Float?
+    /// The wind gust speed.
+    public let windGust: Double?
     
-    /// Value between `0` and `1` (inclusive) representing the relative humidity.
-    public let humidity: Float?
+    /// The time at which the maximum wind gust speed during a given date occurs. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let windGustTime: Date?
     
-    /// The sea-level air pressure in millibars.
-    public let pressure: Float?
+    /// The wind speed at the given time.
+    public let windSpeed: Double?
     
-    /// The average visibility in miles, capped at `10`.
-    public let visibility: Float?
+    /// The direction that the wind is coming *from* in degrees, with true north at 0º and progressing clockwise. If `windSpeed` is `0`, then this will be `nil`.
+    public let windBearing: Double?
+    
+    /// The percentage of sky occluded by clouds, between `0` and `1`, inclusive.
+    public let cloudCover: Double?
+    
+    /// The relative humidity, between `0` and `1`, inclusive.
+    public let humidity: Double?
+    
+    /// The sea-level air pressure.
+    public let pressure: Double?
+    
+    /// The average visibility, capped at 10 miles.
+    public let visibility: Double?
     
     /// The columnar density of total atomspheric ozone at the given time in Dobson units.
-    public let ozone: Float?
+    public let ozone: Double?
     
-    /// Creates a new `DataPoint` from a JSON object.
-    ///
-    /// - parameter json: A JSON object with keys corresponding to the `DataPoint`'s properties.
-    ///
-    /// - returns: A new `DataPoint` filled with data from the given JSON object.
-    public init(fromJSON json: NSDictionary) {
-        time = Date(timeIntervalSince1970: json["time"] as! Double)
-        summary = json["summary"] as? String
-        if let jsonIcon = json["icon"] as? String {
-            icon = Icon(rawValue: jsonIcon)
-        } else {
-            icon = nil
-        }
-        if let jsonSunriseTime = json["sunriseTime"] as? Double {
-            sunriseTime = Date(timeIntervalSince1970: jsonSunriseTime)
-        } else {
-            sunriseTime = nil
-        }
-        if let jsonSunsetTime = json["sunsetTime"] as? Double {
-            sunsetTime = Date(timeIntervalSince1970: jsonSunsetTime)
-        } else {
-            sunsetTime = nil
-        }
-        moonPhase = json["moonPhase"] as? Float
-        nearestStormDistance = json["nearestStormDistance"] as? Float
-        nearestStormBearing = json["nearestStormBearing"] as? Float
-        precipitationIntensity = json["precipIntensity"] as? Float
-        precipitationIntensityMax = json["precipIntensityMax"] as? Float
-        if let jsonPrecipitationIntensityMaxTime = json["precipIntensityMaxTime"] as? Double {
-            precipitationIntensityMaxTime = Date(timeIntervalSince1970: jsonPrecipitationIntensityMaxTime)
-        } else {
-            precipitationIntensityMaxTime = nil
-        }
-        precipitationProbability = json["precipProbability"] as? Float
-        if let jsonPrecipitationType = json["precipType"] as? String {
-            precipitationType = Precipitation(rawValue: jsonPrecipitationType)
-        } else {
-            precipitationType = nil
-        }
-        precipitationAccumulation = json["precipAccumulation"] as? Float
-        temperature = json["temperature"] as? Float
-        temperatureMin = json["temperatureMin"] as? Float
-        if let jsonTemperatureMinTime = json["temperatureMinTime"] as? Double {
-            temperatureMinTime = Date(timeIntervalSince1970: jsonTemperatureMinTime)
-        } else {
-            temperatureMinTime = nil
-        }
-        temperatureMax = json["temperatureMax"] as? Float
-        if let jsonTemperatureMaxTime = json["temperatureMaxTime"] as? Double {
-            temperatureMaxTime = Date(timeIntervalSince1970: jsonTemperatureMaxTime)
-        } else {
-            temperatureMaxTime = nil
-        }
-        apparentTemperature = json["apparentTemperature"] as? Float
-        apparentTemperatureMin = json["apparentTemperatureMin"] as? Float
-        if let jsonApparentTemperatureMinTime = json["apparentTemperatureMinTime"] as? Double {
-            apparentTemperatureMinTime = Date(timeIntervalSince1970: jsonApparentTemperatureMinTime)
-        } else {
-            apparentTemperatureMinTime = nil
-        }
-        apparentTemperatureMax = json["apparentTemperatureMax"] as? Float
-        if let jsonApparentTemperatureMaxTime = json["apparentTemperatureMaxTime"] as? Double {
-            apparentTemperatureMaxTime = Date(timeIntervalSince1970: jsonApparentTemperatureMaxTime)
-        } else {
-            apparentTemperatureMaxTime = nil
-        }
-        dewPoint = json["dewPoint"] as? Float
-        windSpeed = json["windSpeed"] as? Float
-        windBearing = json["windBearing"] as? Float
-        cloudCover = json["cloudCover"] as? Float
-        humidity = json["humidity"] as? Float
-        pressure = json["pressure"] as? Float
-        visibility = json["visibility"] as? Float
-        ozone = json["ozone"] as? Float
+    /// The UV index.
+    public let uvIndex: Double?
+    
+    /// The time at which the maximum UV index occurs during the given day. Only defined on `Forecast`'s `daily` `DataPoint`s.
+    public let uvIndexTime: Date?
+    
+    /// Map `DataPoint`'s properties to JSON keys.
+    private enum CodingKeys: String, CodingKey {
+        case precipitationType = "precipType"
+        case precipitationIntensity = "precipIntensity"
+        case precipitationIntensityError = "precipIntensityError"
+        case precipitationIntensityMax = "precipIntensityMax"
+        case precipitationIntensityMaxTime = "precipIntensityMaxTime"
+        case precipitationProbability = "precipProbability"
+        case precipitationAccumulation = "precipAccumulation"
+        case time, summary, icon, sunriseTime, sunsetTime, moonPhase, nearestStormDistance, nearestStormBearing, temperature, temperatureLow, temperatureLowTime, temperatureHigh, temperatureHighTime, temperatureMax, temperatureMaxTime, temperatureMin, temperatureMinTime, apparentTemperature, apparentTemperatureLow, apparentTemperatureLowTime, apparentTemperatureHigh, apparentTemperatureHighTime, apparentTemperatureMax, apparentTemperatureMaxTime, apparentTemperatureMin, apparentTemperatureMinTime, dewPoint, windGust, windGustTime, windSpeed, windBearing, cloudCover, humidity, pressure, visibility, ozone, uvIndex, uvIndexTime
     }
+    
 }
